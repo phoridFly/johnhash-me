@@ -1,0 +1,13 @@
+.DS_Store
+._.DS_Store
+.well-known
+downloads/
+authorized/
+flies/
+flyapp1/
+flyapp/
+testFlyApiA2.html
+flyapi/
+cgi-bin/
+robots.txt
+a2-default-index.php
