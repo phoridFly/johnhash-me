@@ -1,0 +1,7 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/johnhash/flies"
+PassengerBaseURI "/flies"
+PassengerNodejs "/home/johnhash/nodevenv/flies/10/bin/node"
+PassengerAppType node
+PassengerStartupFile flies.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END

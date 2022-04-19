@@ -1,0 +1,189 @@
+body {
+    background:  rgb(250, 250, 250);
+    color: rgb(84, 84, 84);
+}
+
+#navItems {
+    background-color: white;
+}
+
+#mainContent {
+    width: 100%;
+    clear: both;
+    
+}
+
+#mainContent h4 {
+    text-align: center;
+}
+
+#genusButtonContainer {
+    text-align: center;
+}
+
+.genusButtons {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.15vw; 
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+}
+
+.genusButtons:hover {
+    border-left: 1px solid rgb(225, 133, 62);
+    border-top: 1px solid rgb(225, 133, 62);
+    border-right: 1px solid rgb(225, 133, 62);
+    border-bottom: 1px solid rgb(225, 133, 62);
+    font-size: 1.2vw; 
+
+
+}
+
+.prettySpecies {
+    margin-bottom: 5%;
+    border-left: 1px solid rgb(225, 133, 62);
+    height: auto;
+    background: rgb(255, 255, 255); 
+    border-right: 1px solid white;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding-right: 1%;
+}
+
+#nameWrapper h4 {
+    padding-left: 5%;
+}
+
+#nameWrapper p {
+    padding-left: 5%;
+}
+
+#authorWrapper h4 {
+    padding-left: 5%;
+}
+
+#authorWrapper p {
+    padding-left: 5%;
+}
+
+#nameWrapper, #authorWrapper {
+    width: 43%;
+    float: left;
+    margin-right: 5%;
+    margin-bottom: 1%;
+
+}
+
+#diagnosisWrapper {
+    width: 92%;
+    float: left;
+    clear: both;
+    margin-bottom: 1%;
+}
+
+#diagnosisWrapper h4, p {
+    padding-left: 2.5%;
+}
+
+#speciesListWrapper {
+    float: left;
+    width: 12%;
+    padding-left: 10px;
+    margin-top: 1%;
+    margin-left: 5%;
+    height: 1000px;
+    overflow: scroll;
+    border-left: 1px solid rgb(225, 133, 62);
+    background:  rgb(250, 250, 250);
+}
+
+ul {
+    background:  rgb(250, 250, 250);
+
+}
+
+#speciesList li {
+    font-size: 1.3vw;
+    text-align: center;
+    margin-left: 10px;
+    font-style: italic;
+    background:  rgb(250, 250, 250);
+
+}
+
+.speciesItem {
+    max-width: 90%;
+    height: auto;
+    background:  rgb(250, 250, 250);
+
+}
+
+.speciesItem img{
+    max-width: 90%;
+    height: auto;
+    opacity: 1;
+    cursor: pointer;
+
+}
+
+.speciesItem:hover img {
+    opacity: .6;
+}
+
+li img{
+    clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+
+}
+
+#infoPane {
+    margin-top: 1%;
+    float:right;
+    width: 80%;
+    font-size: 1.2vw;
+}
+
+#nameInput {
+    font-style: italic;
+}
+
+#habimageInput {
+    max-width: 45%;
+    height: auto;
+    float:left;
+    padding-right: 1%;
+}
+
+#imageAndMapWrapper {
+    height: 500px;
+    clear: both;
+}
+
+#mapWrapper {
+    display: inline-block;
+    width: 47%;
+    height: 100%;
+}
+
+#viewDiv {
+    
+    margin: 0;
+    height: 60%;
+    width: 100%;
+}
+
+#loader {
+    text-align: center;
+    font-size: 1vw;
+    visibility: hidden;
+    animation-name: loadFlashing;
+    animation-duration: 800ms;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loadFlashing {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+
+

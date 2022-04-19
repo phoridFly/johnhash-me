@@ -1,0 +1,27 @@
+<p> hi </p>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', buildSpeciesList);
+
+
+function buildSpeciesList() {
+ 
+    let req = new XMLHttpRequest();
+  
+    req.open('GET','http://www.johnhash.me:36666/speciesList', true);
+    req.onload = function(){
+      if(req.status >= 200 && req.status < 400){
+        var response = JSON.parse(req.responseText);
+        console.log(response);
+
+      } 
+      else {
+        console.log("Error in network request: " + req.statusText);
+      }
+  
+    }
+    req.send();
+}
+
+</script>

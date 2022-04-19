@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Species</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+<body>
+    <h2>Modify Species</h2>
+    <p id="navBar">
+        | 
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <p id="navBar">
+        | 
+        <button class="submitButton"><a href="http://johnhash.me/flies/modSpecies" id="modSpecies">BACK</a></button>
+         | 
+    </p>
+    <br>
+    <form id="modSpeciesForm" action="http://johnhash.me/flies/updateSpeciesSubmit">
+        <fieldset>
+            {{#each items}}
+            <legend>Modify Species #{{this.id}}: {{this.family}} {{this.genus}} {{this.specific_epithet}}</legend>
+                <label class="input_box">Family:
+                    <input type="text" name="family" id="family" value="{{this.family}}">
+                </label>
+                <label class="input_box">Genus:
+                    <input type="text" name="genus" id="genus" value="{{this.genus}}">
+                </label>
+                <label class="input_box">Specific Epithet:
+                    <input type="text" name="specific_epithet" id="specific_epithet" value="{{this.specific_epithet}}">
+                </label>
+                <label class="input_box">Year:
+                    <input type="number" name="year" id="year" value="{{this.year}}">
+                </label>
+                <label class="input_box">User ID:
+                    <input type="text" name="user_id" id="user_id" value="">
+                </label>
+                <input type="hidden" name="id" value={{this.id}}>
+                <input type ="submit" name="enter" id="enter"> 
+            {{/each}} 
+        </fieldset> 
+    </form>
+</body>

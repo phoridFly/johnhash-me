@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify People</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+
+<body>
+    <h2>{{title}}</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <form id="addPeople" class="addForm">
+        <fieldset class="addFS">
+            <legend class="addLegend">Add New Person</legend>
+                <div id="addInputArea">
+                    <label class="input_box"> First Name:
+                        <input type="text" name="first_name" id="first_name">
+                    </label>
+                    <label class="input_box"> Last Name:
+                        <input type="text" name="last_name" id="last_name">
+                    </label>
+                    <label class="input_box"> User ID:
+                        <input type="text" name="user_id" id="user_id">
+                    </label>
+                    </br>
+                </div>
+                <div class="addButtonArea">
+                    <p id="buttonDivider" style="display:inline">  </p>
+                    <input type ="submit" name="enterPerson" id="enterPerson" class="submitButton" value="ADD PERSON">
+                    <p id="buttonDivider" style="display:inline">  </p>
+                </div>
+        </fieldset> 
+    </form>
+    <table id="table" data-search="true" data-show-columns="true" data-show-multi-sort="true" data-pagination="true" data-page-size="100" class="table">
+        <thead>
+            <th data-sortable="true">ID</th>
+            <th data-sortable="true">First Name</th>
+            <th data-sortable="true">Last Name</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {{#each people}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.first_name}}</td>
+                <td>{{this.last_name}}</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/updatePeople?id={{this.id}}" class="updateRow" id="updateRow{{this.id}}">UPDATE</td>
+                <td><button class="submitButton" onclick="deleteFunction({{this.id}})" class="deleteRow" id="deleteRow{{this.id}}">DELETE</button></td>
+                <!--<td><button class="submitButton"><a href="http://johnhash.me/flies/deletePeopleSubmit?id={{this.id}}" onclick="return confirm('Delete {{this.first_name}} {{this.last_name}}?')" class="deleteRow" id="deleteRow{{this.id}}">DELETE</button></td>-->
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script src="/js/addPeopleScript.js"></script>
+    <script>
+
+        function deleteFunction(idNumber) {
+            //var userId = document.getElementById('user_id').value;
+            let userId = prompt("Enter user id to confirm:", "user id");
+            //alert(userId);
+            //confirm('Delete' + ' ' + first + ' ' + last'?');
+            //if confirm('Delete ID number: ' + idNumber +' ?') == true {
+
+                let req = new XMLHttpRequest(); 
+
+                // this is the whole query string starting with ? to be inserted in front of path
+                let payload = '?id='+idNumber+'&appID='+userId;
+                
+                //open the request to /addPerson
+                req.open('GET','http://johnhash.me/flies/deletePeopleSubmit'+payload, true);
+                req.setRequestHeader('Content-Type', 'application/json');
+                req.addEventListener('load',function(){
+                    if(req.status >= 200 && req.status < 400){
+                    //var response = JSON.parse(req.responseText);
+                    //alert(response);
+                    alert ('ID number: ' + idNumber +' deleted. Refresh to see changes.');
+                    } else {
+                    console.log("Error in network request: " + req.statusText);
+                    }});
+                req.send(JSON.stringify(payload));
+
+            
+        }
+
+    </script>
+</body>
+</html>

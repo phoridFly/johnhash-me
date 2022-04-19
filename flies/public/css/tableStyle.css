@@ -1,0 +1,35 @@
+body {
+    font-size: 1.1vw;
+}
+
+table tr:nth-child(even) {
+    background-color: lightsteelblue;
+}
+
+table tr:hover {
+    background-color: rgb(213, 245, 194);
+} 
+
+label {
+    padding-left: 1%;
+}
+
+form {
+    background-color: lightsteelblue;
+}
+
+fieldset {
+    padding-left: 1%;;
+}
+
+h2 {
+    padding-left: 1%;
+}
+
+#navBar {
+    padding-left: 1%;
+}
+
+table {
+    padding-left: 1%;
+}

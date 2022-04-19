@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify People</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+
+<body>
+    <h2>{{title}}</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <form id="addLocality" class="addForm">
+        <fieldset class="addFS">
+            <legend class="addLegend">Add New Locality</legend>
+                <div id="addInputArea">
+                    <label class="input_box"> Country:
+                        <input type="text" name="country" id="country">
+                    </label>
+                    <label class="input_box"> Region:
+                        <input type="text" name="region" id="region">
+                    </label>
+                    <label class="input_box">Place:
+                        <input type="text" name="place" id="place">
+                    </label>
+                    </br>
+                    <label class="input_box"> Longitude:
+                        <input type="number" step="any" name="long" id="long">
+                    </label>
+                    <label class="input_box"> Latitude:
+                        <input type="number" step="any" name="lat" id="lat">
+                    </label>
+                    <label class="input_box"> Elevation (m):
+                        <input type="number" step="any" name="elev" id="elev">
+                    </label>
+                    <label class="input_box"> User ID:
+                        <input type="text" name="user_id" id="user_id">
+                    </label>
+                    </br>
+                </div>
+                <div class="addButtonArea">
+                    <p id="buttonDivider" style="display:inline">  </p>
+                    <input type ="submit" name="enterLocality" id="enterLocality" class="submitButton" value="ADD LOCALITY">
+                    <p id="buttonDivider" style="display:inline">  </p>						
+                </div>
+        </fieldset> 
+    </form>
+    <table id="table" data-search="true" data-show-columns="true" data-show-multi-sort="true" data-pagination="true" data-page-size="100" class="table">
+        <thead>
+            <th data-sortable="true">ID</th>
+            <th data-sortable="true">Country</th>
+            <th data-sortable="true">Region</th>
+            <th data-sortable="true">Place</th>
+            <th data-sortable="true">Latitude</th>
+            <th data-sortable="true">Longitude</th>
+            <th data-sortable="true">Elevation</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {{#each locality}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.country}}</td>
+                <td>{{this.region}}</td>
+                <td>{{this.place}}</td>
+                <td>{{this.latitude}}</td>
+                <td>{{this.longitude}}</td>
+                <td>{{this.elevation}}</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/updateLocality?id={{this.id}}" class="updateRow" id="updateRow{{this.id}}">UPDATE</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/deleteLocalitySubmit?id={{this.id}}" onclick="return confirm('Delete {{this.place}} {{this.country}}?')" class="deleteRow" id="deleteRow{{this.id}}">DELETE</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script src="/js/addLocalityScript.js"></script>
+</body>
+</html>

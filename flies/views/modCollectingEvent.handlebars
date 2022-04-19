@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Collecting Events</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+
+<body>
+    <h2>{{title}}</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <form id="addCollEvent" class="addForm">
+        <fieldset class="addFS">
+            <legend class="addLegend">Add New Collecting Event</legend>
+                <div id="addInputArea">
+                    <label class="input_box"> Method:
+                        <input type="text" name="method" id="method">
+                    </label>
+                    <label class="input_box"> Start Date:
+                        <input type="start_date" name="start_date" id="start_date" value="2000-12-25">
+                    </label>
+                    <label class="input_box"> End Date:
+                        <input type="end_date" name="end_date" id="end_date" value="2000-12-25">
+                    </label>
+                    </br>
+                    <label> Locality ID:
+                        <select id="localityDropdown" class="input_box">
+                    </select>						
+                    </label>
+                    <label class="input_box"> User ID:
+                        <input type="text" name="user_id" id="user_id">
+                    </label>
+                    <br>
+                </div>
+                <div class="addButtonArea">
+                    <p id="buttonDivider" style="display:inline">  </p>
+                    <input type ="submit" name="enterCollectingEvent" id="enterCollectingEvent" class="submitButton" value="ADD EVENT">
+                    <p id="buttonDivider" style="display:inline">  </p>
+                </div>
+        </fieldset> 
+    </form>
+    <table id="table" data-search="true" data-show-columns="true" data-show-multi-sort="true" data-pagination="true" data-page-size="100" class="table">
+        <thead>
+            <th data-sortable="true">ID</th>
+            <th data-sortable="true">Start Date</th>
+            <th data-sortable="true">End Date</th>
+            <th data-sortable="true">Method</th>
+            <th data-sortable="true">Country</th>
+            <th data-sortable="true">Region</th>
+            <th data-sortable="true">Place</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {{#each event}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.start_date}}</td>
+                <td>{{this.end_date}}</td>
+                <td>{{this.method}}</td>
+                <td>{{this.country}}</td>
+                <td>{{this.region}}</td>
+                <td>{{this.place}}</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/updateCollectingEvent?id={{this.id}}" class="updateRow" id="updateRow{{this.id}}">UPDATE</td>
+                <td><button class="submitButton" onclick="deleteFunction({{this.id}})" class="deleteRow" id="deleteRow{{this.id}}">DELETE</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script src="/js/addCollectingEventScript.js"></script>
+    <script>
+        function deleteFunction(idNumber) {
+            //var userId = document.getElementById('user_id').value;
+            let userId = prompt("Enter user id to confirm:", "user id");
+
+                let req = new XMLHttpRequest(); 
+
+                // this is the whole query string starting with ? to be inserted in front of path
+                let payload = '?id='+idNumber+'&appID='+userId;
+                
+                //open the request to /addPerson
+                req.open('GET','http://johnhash.me/flies/deleteCollectingEventSubmit'+payload, true);
+                req.setRequestHeader('Content-Type', 'application/json');
+                req.addEventListener('load',function(){
+                    if(req.status >= 200 && req.status < 400){
+                    //var response = JSON.parse(req.responseText);
+                    //alert(response);
+                    alert ('ID number: ' + idNumber +' deleted. Refresh to see changes.');
+                    } else {
+                    console.log("Error in network request: " + req.statusText);
+                    }});
+                req.send(JSON.stringify(payload));
+
+            
+        }
+
+    </script>
+</body>
+</html>

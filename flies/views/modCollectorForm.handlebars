@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Collectors</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+<body>
+    <h2>Modify Collector</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <p id="navBar">
+        | 
+        <button class="submitButton"><a href="http://johnhash.me/flies/modCollector" id="modCollector">BACK</a></button>
+         | 
+    </p>
+    <br>
+    <form id="modCollectorForm" action="http://johnhash.me/flies/updateCollectorSubmit">
+        <fieldset>
+            {{#each people}}
+            <legend>Modify the | [{{this.people_id}}] {{this.last_name}} - [{{this.coll_event_id}}] {{this.method}} on {{this.date}} | Relationship</legend>
+                <label class="input_box">Person:
+                    <select type="number" name="people_id" id="personDropdown" >
+                        <option value={{this.people_id}}>{{this.first_name}} {{this.last_name}}</option>
+                    </select>
+                </label>
+                <br>
+                <label class="input_box">Collecting Event:
+                    <select type="number" name="coll_event_id" id="collEventDropdown">
+                        <option value={{this.coll_event_id}}>{{this.date}}, {{this.country}}, {{this.place}}, {{this.method}}</option>
+                    </select>
+                </label>
+                <br>
+                <input type="hidden" name="old_people_id" value={{this.people_id}}>
+                <input type="hidden" name="old_coll_event_id" value={{this.coll_event_id}}>
+                <input type ="submit" name="enter" id="enter" class="submitButton"> 
+            {{/each}} 
+            <script src="/js/addCollectorScript.js"></script>
+        </fieldset> 
+    </form>
+</body>

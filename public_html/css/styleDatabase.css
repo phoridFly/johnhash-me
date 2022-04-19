@@ -1,0 +1,43 @@
+body {
+    background:  rgb(250, 250, 250);
+    font-size: 1.7vw;
+
+}
+
+#title {
+    color: rgb(43, 43, 43);
+    font-family: 'hk_groteskregular', 'sans-serif';
+    text-align: center;
+    padding-top: 10%;
+    background:  rgb(250, 250, 250);
+
+}
+
+.mainSection {
+    width: 100%;
+    background:  rgb(250, 250, 250);
+
+}
+
+h1 {
+    text-align: center;
+}
+
+#sampleImg {
+    width: 100%;
+}
+
+
+#sampleImg img {
+    display: block;
+    margin: auto;
+    width: 45%;
+}
+
+.dbInfo {
+    width: 90%;
+    background: white;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2%;
+}

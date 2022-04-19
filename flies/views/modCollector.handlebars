@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Collectors</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+
+<body>
+    <h2>{{title}}</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <form id="addPeopleEvent" class="addForm">
+        <fieldset class="addFS">
+            <legend class="addLegend">Add New Collector Assignment</legend>
+                <div id="addInputArea">
+                    <label> Person:
+                        <select id="personDropdown" class="input_box">
+                        </select>						
+                    </label>
+                    <label> Collecting Event:
+                        <select id="collEventDropdown" class="input_box">
+                        </select>						
+                    </label>
+                    <label class="input_box"> User ID:
+                        <input type="text" name="user_id" id="user_id">
+                    </label>
+                    </br>
+                </div>
+                <div class="addButtonArea">
+                    <p id="buttonDivider" style="display:inline">  </p>
+                    <input type ="submit" name="enterCollector" id="enterCollector" class="submitButton" value="ASSIGN COLLECTOR">
+                    <p id="buttonDivider" style="display:inline">  </p>
+                </div>
+        </fieldset> 
+    </form>
+    <table id="table" data-search="true" data-show-columns="true" data-show-multi-sort="true" data-pagination="true" data-page-size="100" class="table">
+        <thead>
+            <th data-sortable="true">PID</th>
+            <th data-sortable="true">First Name</th>
+            <th data-sortable="true">Last Name</th>
+            <th data-sortable="true">CID</th>
+            <th data-sortable="true">Country</th>
+            <th data-sortable="true">Region</th>
+            <th data-sortable="true">Place</th>
+            <th data-sortable="true">Start Date</th>
+            <th data-sortable="true">End Date</th>
+            <th data-sortable="true">Method</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {{#each people}}
+            <tr>
+                <td>{{this.people_id}}</td>
+                <td>{{this.first_name}}</td>
+                <td>{{this.last_name}}</td>
+                <td>{{this.coll_event_id}}</td>
+                <td>{{this.country}}</td>
+                <td>{{this.region}}</td>
+                <td>{{this.place}}</td>
+                <td>{{this.start_date}}</td>
+                <td>{{this.end_date}}</td>
+                <td>{{this.method}}</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/updateCollector?people_id={{this.people_id}}&coll_event_id={{this.coll_event_id}}" class="updateRow" id="updateRow{{this.people_id}}+{{this.coll_event_id}}">UPDATE</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/deleteCollectorSubmit?people_id={{this.people_id}}&coll_event_id={{this.coll_event_id}}" onclick="return confirm('Delete {{this.last_name}} - {{this.date}} {{this.method}} Relationship?')" class="deleteRow" id="deleteRow{{this.people_id}}+{{this.coll_event_id}}">DELETE</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script src="/js/addCollectorScript.js"></script>
+</body>
+</html>

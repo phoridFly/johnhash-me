@@ -1,0 +1,16 @@
+#input {
+    float: left;
+}
+
+#output {
+    position: static;
+    width: 100px;
+    height: auto;
+    margin-left: 800px;
+    margin-top: 50px;
+    font-size: 9px;
+}
+
+#originalImage {
+    position: static;
+}

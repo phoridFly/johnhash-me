@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Specimens</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+
+<body>
+    <h2>{{title}}</h2>
+    <p id="navBar">
+         
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <form id="addSpecimen" class="addForm">
+        <fieldset class="addFS">
+            <legend class="addLegend">Add New Specimen</legend>
+                <div id="addInputArea">
+                    <label class="input_box"> Institution Code:
+                        <input type="text" name="institution_code" id="institution_code">
+                    </label>
+                    <label class="input_box"> Collection Code:
+                        <input type="text" name="collection_code" id="collection_code">
+                    </label>
+                    <label class="input_box"> Catalog Number:
+                        <input type="number" name="catalog_number" id="catalog_number">
+                    </label>            
+                    <br>
+                    <label> Species:
+                        <select id="speciesDropdown" class="input_box">
+                        </select>
+                    </label>
+                    <label> Collecting Event:
+                        <select id="collEventDropdown" class="input_box">
+                        </select>						
+                    </label>
+                    <br>
+                    <label class="input_box"> Type Status:
+                        <input type="text" name="type_status" id="type_status">
+                    </label>
+                    <label class="input_box"> Sex:
+                        <input type="text" name="sex" id="sex">
+                    </label>
+                    <label class="input_box"> Image Name:
+                        <input type="text" name="image_name" id="image_name"> 
+                    </label>
+                    <label class="input_box"> User ID:
+                        <input type="text" name="user_id" id="user_id">
+                    </label>
+                    <br>
+                </div>
+                <p id="buttonDivider" style="display:inline">  </p>
+                <input type ="submit" name="enterSpecimen" id="enterSpecimen" class="submitButton" value="ADD SPECIMEN">
+                <p id="buttonDivider" style="display:inline">  </p>             
+        </fieldset> 
+    </form>
+    <table id="table" data-search="true" data-show-columns="true" data-show-multi-sort="true" data-pagination="true" data-page-size="100" class="table">
+        <thead>
+            <th data-sortable="true">ID</th>
+            <th data-sortable="true">Institution Code</th>
+            <th data-sortable="true">Collection Code</th>
+            <th data-sortable="true">Catalog Number</th>
+            <th data-sortable="true">Genus</th>
+            <th data-sortable="true">Species</th>
+            <th data-sortable="true">Country</th>
+            <th data-sortable="true">Place</th>
+            <th data-sortable="true">Start Date</th>
+            <th data-sortable="true">End Date</th>
+            <th data-sortable="true">Type Status</th>
+            <th data-sortable="true">Sex</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {{#each specimens}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.institution_code}}</td>
+                <td>{{this.collection_code}}</td>
+                <td>{{this.catalog_number}}</td>
+                <td>{{this.genus}}</td>
+                <td>{{this.specific_epithet}}</td>
+                <td>{{this.country}}</td>
+                <td>{{this.place}}</td>
+                <td>{{this.start_date}}</td>
+                <td>{{this.end_date}}</td>
+                <td>{{this.type_status}}</td>
+                <td>{{this.sex}}</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/updateSpecimen?id={{this.id}}" class="updateRow" id="updateRow{{this.id}}">UPDATE</td>
+                <td><button class="submitButton" onclick="deleteFunction({{this.id}})" class="deleteRow" id="deleteRow{{this.id}}">DELETE</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script src="/js/addSpecimenScript.js"></script>
+    <script>
+
+        function deleteFunction(idNumber) {
+            //var userId = document.getElementById('user_id').value;
+            let userId = prompt("Enter user id to confirm:", "user id");
+
+                let req = new XMLHttpRequest(); 
+
+                // this is the whole query string starting with ? to be inserted in front of path
+                let payload = '?id='+idNumber+'&appID='+userId;
+                
+                //open the request to /addPerson
+                req.open('GET','http://johnhash.me/flies/deleteSpecimenSubmit'+payload, true);
+                req.setRequestHeader('Content-Type', 'application/json');
+                req.addEventListener('load',function(){
+                    if(req.status >= 200 && req.status < 400){
+                    //var response = JSON.parse(req.responseText);
+                    //alert(response);
+                    alert ('ID number: ' + idNumber +' deleted. Refresh to see changes.');
+                    } else {
+                    console.log("Error in network request: " + req.statusText);
+                    }});
+                req.send(JSON.stringify(payload));
+
+            
+        }
+
+    </script>
+</body>
+</html>

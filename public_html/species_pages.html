@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/css/main.css">
+
+
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/speciespage.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+
+
+        <script src="https://js.arcgis.com/4.12/"></script>
+        <script src="js/speciespages.js"></script>
+
+
+        <title>Species Pages</title>
+    </head>
+    <body>
+        <nav id="topBar">
+            <ul id="navItems">
+                <li id="homeIcon"><a href="index.html">Home</a></li>
+                <li>
+                    <div class="optionsDropdown" ><a class="active" href="research.html">Research</a>
+                        <div class= "dropDownWrapper"></div>
+                            <div class="dropContent">
+                                <a href="species_pages.html">Species Pages</a>
+                                <a href="species_keys.html">Species Keys</a>
+                                <a href="research.html#mainEntoHide">Phoridae</a>
+                                <a href="millipede_killing_flies.html">Millipede-Killing-Flies</a>
+                                <a href="research.html#otherProjects">Other Projects</a>
+                            </div>
+                        </div>
+                    </div> 
+                </li>
+                <li> 
+                    <div class="optionsDropdown" ><a href="code.html">Code</a>
+                        <div class= "dropDownWrapper">
+                            <div class="dropContent">
+                                <a href="amino_translate.html">Amino Acids</a>
+                                <a href="mapping.html">Mapping Tool</a>
+                                <a href="collect_app.html">Collection App</a>
+                                <a href="description_tool.html">Species Description</a>
+                                <a href="database.html">Database</a>
+                                <a href="https://github.com/phoridFly?tab=repositories">GitHub</a>
+                            </div>
+                        </div>    
+                    </div>
+                </li>
+                <li>
+                    <div class="optionsDropdown" ><a href="cv.html">CV/Resume</a>
+                        <div class= "dropDownWrapper">
+                            <div class="dropContent">
+                                <a href="cv.html#education">Education</a>
+                                <a href="cv.html#appointments">Appointments</a>
+                                <a href="cv.html#skills">Skills</a>
+                                <a href="cv.html#pubs">Publications</a>
+                            </div>
+                        </div>    
+                    </div>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <div id="top_video_wrapper">
+            <div class="videoMain">
+                <img src="images/species_pages_main.png">
+                <div class="videoCaption">
+                    <p id="capLine1">Species Pages</p>
+                    <p id="capLine2">phoridae</p>
+    
+                </div>
+            </div>
+        </div>
+
+        <div id="mainContent">
+            <h4>Explore species I've worked with in my research.<br>
+                 Select one of the genera below, and then select a species from the list on the left for more information.<br>
+                  (Please be patient while list loads).
+            </h4>
+            <div id="genusButtonContainer">
+                <button class="genusButtons" onclick="buildSpeciesList('Myriophora')">Myriophora</button>
+                <button class="genusButtons" onclick="buildSpeciesList('Megaselia')">Megaselia</button>
+                <div id="loader">LOADING</div>
+            </div>
+            <div id="speciesListWrapper">
+                <ul id="speciesList">
+                </ul>
+            </div>
+            <div id="infoPane">
+                <div id="nameWrapper" class="prettySpecies">
+                    <h4 id="name">Name</h4>
+                    <p id="nameInput"></p>
+                </div>
+                <div id="authorWrapper" class="prettySpecies">
+                    <h4 id="authorYear">Author(s) and Year</h4>
+                    <p id="authorYearInput"></p>
+                </div>
+                <div id="diagnosisWrapper" class="prettySpecies">
+                    <h4 id="diagnosis">Diagnosis</h4>
+                    <p id="diagnosisInput"></p>
+                </div>
+
+                <div id="imageAndMapWrapper">
+                    <img id="habimageInput">
+
+                    <div id="mapWrapper">
+                        <div id="viewDiv"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="js/scroll.js"></script>    
+    </body>
+</html>

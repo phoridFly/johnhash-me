@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify People</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+<body>
+    <h2>Modify Person</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <p id="navBar">
+        | 
+        <button class="submitButton"><a href="http://johnhash.me/flies/modPeople" id="modPeople">BACK</a></button>
+         | 
+    </p>
+    <br>
+    <form id="modPeopleForm" action="http://johnhash.me/flies/updatePeopleSubmit">
+        <fieldset>
+            {{#each items}}
+            <legend>Modify Person #{{this.id}}: {{this.first_name}} {{this.last_name}}</legend>
+                <label class="input_box">First Name:
+                    <input type="text" name="first_name" id="first_name" value="{{this.first_name}}">
+                </label>
+                <label class="input_box">Last Name:
+                    <input type="text" name="last_name" id="last_name" value="{{this.last_name}}">
+                </label>
+                <label class="input_box">User ID:
+                    <input type="text" name="user_id" id="user_id" value="">
+                </label>
+                <input type="hidden" name="id" value={{this.id}}>
+                <input type ="submit" name="enter" id="enter"> 
+            {{/each}} 
+        </fieldset> 
+    </form>
+</body>

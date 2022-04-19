@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Collecting Event</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+<body>
+    <h2>Modify Collecting Event</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <p id="navBar">
+        | 
+        <button class="submitButton"><a href="http://johnhash.me/flies/modCollectingEvent" id="modEvents">BACK</a></button>
+         | 
+    </p>
+    <br>
+    <form id="modCollectingEventForm" action="http://johnhash.me/flies/updateCollectingEventSubmit">
+        <fieldset>
+            {{#each event}}
+            <legend>Modify Event #{{this.id}}: {{this.method}} from {{this.startDateShown}} to {{this.endDateShown}} in {{this.place}},{{this.region}}, {{this.country}}</legend>
+                <label class="input_box">Locality:
+                    <select type="number" id="localityDropdown" name="locality_id">
+                        <option value={{this.locality_id}}>{{this.country}}, {{this.region}}, {{this.place}}</option>
+                    </select>						
+                </label>
+                <label class="input_box">Method:
+                    <input type="text" name="method" id="method" value="{{this.method}}">
+                </label>
+                <label class="input_box">Start Date:
+                    <input type="date" name="date" id="date" value={{this.start_date}}>
+                </label>
+                <label class="input_box">End Date:
+                    <input type="date" name="date" id="date" value={{this.end_date}}>
+                </label>
+                <label class="input_box">User ID:
+                    <input type="text" name="user_id" id="user_id" value="">
+                </label>
+                <input type="hidden" name="id" value={{this.id}}>
+                <input type ="submit" name="enter" id="enter"> 
+            {{/each}} 
+        </fieldset> 
+    </form>
+    <script src="/js/addCollectingEventScript.js"></script>
+</body>

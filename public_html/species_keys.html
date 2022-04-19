@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        
+        <link href="css/speciespage.css" rel="stylesheet" type="text/css"/>
+        <link href="css/speciesKeys.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+
+        <script src="js/identificationKeys.js"></script>
+
+
+        <title>Species Keys</title>
+    </head>
+    <body>
+        <nav id="topBar">
+            <ul id="navItems">
+                <li id="homeIcon"><a href="index.html">Home</a></li>
+                <li>
+                    <div class="optionsDropdown" ><a class="active" href="research.html">Research</a>
+                        <div class= "dropDownWrapper"></div>
+                            <div class="dropContent">
+                                <a href="species_pages.html">Species Pages</a>
+                                <a href="species_keys.html">Species Keys</a>
+                                <a href="research.html#mainEntoHide">Phoridae</a>
+                                <a href="millipede_killing_flies.html">Millipede-Killing-Flies</a>
+                                <a href="research.html#otherProjects">Other Projects</a>
+                            </div>
+                        </div>
+                    </div> 
+                </li>
+                <li> 
+                    <div class="optionsDropdown" ><a href="code.html">Code</a>
+                        <div class= "dropDownWrapper">
+                            <div class="dropContent">
+                                <a href="amino_translate.html">Amino Acids</a>
+                                <a href="mapping.html">Mapping Tool</a>
+                                <a href="collect_app.html">Collection App</a>
+                                <a href="description_tool.html">Species Description</a>
+                                <a href="database.html">Database</a>
+                                <a href="https://github.com/phoridFly?tab=repositories">GitHub</a>
+                            </div>
+                        </div>    
+                    </div>
+                </li>
+                <li>
+                    <div class="optionsDropdown" ><a href="cv.html">CV/Resume</a>
+                        <div class= "dropDownWrapper">
+                            <div class="dropContent">
+                                <a href="cv.html#education">Education</a>
+                                <a href="cv.html#appointments">Appointments</a>
+                                <a href="cv.html#skills">Skills</a>
+                                <a href="cv.html#pubs">Publications</a>
+                            </div>
+                        </div>    
+                    </div>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <div id="top_video_wrapper">
+            <div class="videoMain">
+                <img src="images/species_pages_main.png">
+                <div class="videoCaption">
+                    <p id="capLine1">Species Keys</p>
+                    <p id="capLine2">phoridae</p>
+    
+                </div>
+            </div>
+        </div>
+
+        <div id="mainContent">
+            <h4>
+                 Select one of the genera below, then select any characters from the left column.<br>
+                 Characters at the top of the list generally have more diagnostic power.<br> 
+                 Any species that match the currently selected characters appear in the center.<br>
+                 Select any species in the center column to see details for that species on the right side column.<br>
+                    
+            </h4>
+            <div id="genusButtonContainer">
+                <button class="genusButtons" onclick="fetchKeyCharacters('Myriophora')">Myriophora</button>
+                <button class="genusButtons" onclick="fetchKeyCharacters('Pseudomyriophora')">Pseudomyriophora</button>
+                <button class="genusButtons" onclick="fetchKeyCharacters('Oreophilophora')">Oreophilophora</button>
+                
+
+
+                <div id="loader">LOADING: allow 20 to 30 seconds</div>
+            </div>
+        </div>
+
+        <p id="selectedGenus">Currently Selected Genus:</p>
+
+        
+        
+        <div class="flexKeyContainer">
+
+            <div class="flexKeyChild1">
+                <h3>Select Characters Below</h3>
+                <form id="characterForm"> 
+                </form> 
+            </div>
+            
+
+            <div class="flexKeyChild2">
+                <h3>Matching Species</h3>
+                <ul id="currentSpeciesList">
+                </ul>
+            </div>
+            
+            <div id="speciesDetails" class='flexKeyChild3'>
+                <h3>Species Details</h3>
+                <table id="selectedSpecies">
+                    <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                    </tr>
+                </table>
+                <div id="speciesImgWrapper">
+                    
+                </div>
+            </div>
+        </div>
+
+        
+            
+
+
+
+        <script src="js/scroll.js"></script>    
+    </body>
+</html>

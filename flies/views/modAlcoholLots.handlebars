@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Alcohol Lots</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+
+<body>
+    <h2>{{title}}</h2>
+    <p id="navBar">
+         
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <form id="addAlcoholLot" class="addForm">
+        <fieldset class="addFS">
+            <legend class="addLegend">Add New Alcohol Lot</legend>
+                <div id="addInputArea">
+                    <label> Collection Event:
+                        <select id="collEventDropdown" class="input_box">
+                        </select>
+                    </label>
+                    <label class="input_box"> Empty:
+                        <input type="text" name="empty" id="empty">
+                    </label>
+                    <br>
+                    <label class="input_box"> Approximate Number:
+                        <input type="number" name="approximate_number" id="approximate_number">
+                    </label>            
+                    <label class="input_box"> Sample Taxa:
+                        <input type="text" name="sample_taxa" id="sample_taxa">
+                    </label>
+                    <label class="input_box"> Collector Code:
+                        <input type="text" name="collector_code" id="collector_code">
+                    </label>
+                    <br>
+                </div>
+                <p id="buttonDivider" style="display:inline">  </p>
+                <input type ="submit" name="enterAlcoholLot" id="enterAlcoholLot" class="submitButton" value="ADD ALCOHOL LOT">
+                <p id="buttonDivider" style="display:inline">  </p>             
+        </fieldset> 
+    </form>
+    <table id="table" data-search="true" data-show-columns="true" data-show-multi-sort="true" data-pagination="true" data-page-size="100" class="table">
+        <thead>
+            <th data-sortable="true">ID</th>
+            <th data-sortable="true">CEID</th>
+            <th data-sortable="true">Country </th>
+            <th>Region</th>
+            <th data-sortable="true">Empty</th>
+            <th data-sortable="true">Approximate Number</th>
+            <th>Sample Taxa</th>
+            <th>Collector Code</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </thead>
+        <tbody>
+            {{#each lots}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.cei}}</td>
+                <td>{{this.country}}</td>
+                <td>{{this.region}}</td>
+                <td>{{this.empty}}</td>
+                <td>{{this.approx_number}}</td>
+                <td>{{this.sample_taxa}}</td>
+                <td>{{this.collector_code}}</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/updateAlcoholLot?id={{this.id}}" class="updateRow" id="updateRow{{this.id}}">UPDATE NOT IMPLEMENTED YET</td>
+                <td><button class="submitButton"><a href="http://johnhash.me/flies/deleteAlcoholLotSubmit?id={{this.id}}" onclick="return confirm('Delete {{this.specific_epithet}} specimen, catalog number {{this.catalog_number}}?')" class="deleteRow" id="deleteRow{{this.id}}">DELETE NOT IMPLEMENTED YET</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <script src="/js/addAlcoholLotsScript.js"></script>
+</body>
+</html>

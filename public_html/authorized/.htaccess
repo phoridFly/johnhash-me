@@ -1,0 +1,8 @@
+AuthUserFile /home/johnhash/.htpasswd
+AuthType Basic
+AuthName "Secret Database"
+Require valid-user
+
+<Files "admin.html">
+  Require valid-user
+</Files>

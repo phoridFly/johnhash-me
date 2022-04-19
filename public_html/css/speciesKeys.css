@@ -1,0 +1,123 @@
+#mainContent h4 {
+    text-align: left;
+    margin-left: 5%;
+    border-left: 2px solid rgb(225, 133, 62);
+    padding-left: 1%;
+}
+
+
+#navItems {
+    background-color: white;
+}
+
+.flexKeyContainer {
+    display: flex;
+    background-color: white;
+}
+
+.flexKeyContainer ul {
+    font-size: 1.15vw;
+    padding-left: 2%;
+
+}
+
+.flexKeyChild1 {
+    margin-left: 2%;
+    flex: 1;
+    max-width: 30%;
+
+}
+
+.flexKeyChild1 form {
+    font-size: 1.15vw;
+}
+
+label span {
+    font-size: 0.75vw;
+    background-color: white;
+    float: right;
+}
+
+label span img {
+    display: none;
+}
+
+label:hover {
+    color: rgb(225, 133, 62);
+}
+
+label span:hover img {
+    display: block;
+    float: right;
+    max-width: 100%;
+}
+
+#submitButton {
+    font-size: 1.25vw;
+    background-color:  rgb(225, 133, 62)}
+
+.flexKeyChild2 {
+    min-width: 17%;
+    margin-left: 2%;
+
+}
+
+.flexKeyChild2 ul {
+    min-width: 20%;
+    position: sticky;
+    top: 0;
+    border-left: 2px solid rgb(225, 133, 62);
+
+}
+
+.flexKeyChild2 li {
+    font-style: italic;
+    float: none;
+    cursor: pointer;
+
+}
+.flexKeyChild3 {
+    max-width: 40%;
+    
+    margin-left: 2%;
+
+
+
+}
+
+.flexKeyChild3 table {
+    border-left: 2px solid rgb(225, 133, 62);
+    font-size: 1.15vw;
+
+}
+
+td {
+    padding: 1%;
+}
+
+h3 {
+    padding-left: 3%;
+
+}
+
+.descriptionAttribute {
+    max-width: 35%;
+    font-weight: bolder;
+}
+
+
+fieldset {
+    background-color: whitesmoke;
+}
+
+#selectedGenus {
+    margin-left: 40%;
+}
+
+#selectedGenus {
+    visibility: hidden;
+}
+
+.speciesImages {
+    max-width: 110%;
+}

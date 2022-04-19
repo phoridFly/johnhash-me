@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Specimens</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+<body>
+    <h2>Modify Specimen</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <p id="navBar">
+        | 
+        <button class="submitButton"><a href="http://johnhash.me/flies/modSpecimen" id="modSpecimen">BACK</a></button>
+         | 
+    </p>
+    <br>
+    <form id="modSpecimenForm" action="http://johnhash.me/flies/updateSpecimenSubmit">
+        <fieldset>
+            {{#each items}}
+            <legend>Modify Specimen #{{this.id}}: {{this.institution_code}}-{{this.collection_code}}-{{this.catalog_number}}</legend>
+                <label class="input_box">Institution Code:
+                    <input type="text" name="institution_code" id="InstCode" value="{{this.institution_code}}">
+                </label>
+                <br>
+                <label class="input_box">Collection Code:
+                    <input type="text" name="collection_code" id="collCode" value="{{this.collection_code}}">
+                </label>
+                <br>
+                <label class="input_box">Catalog Number:
+                    <input type="number" name="catalog_number" id="catNumber" value={{this.catalog_number}}>
+                </label>
+                <br>
+                <label class="input_box">Species:
+                    <select type="number" name="species_id" id="speciesDropdown" >
+                        <option value={{this.species_id}}>{{this.genus}} {{this.specific_epithet}}</option>
+                    </select>
+                </label>
+                <br>
+                <label class="input_box">Collecting Event:
+                    <select type="number" name="collecting_event_id" id="collEventDropdown">
+                        <option value={{this.collecting_event_id}}>{{this.start_date}}, {{this.end_date}}, {{this.country}}, {{this.place}}, {{this.method}}</option>
+                    </select>
+                </label>
+                <br>
+                <label class="input_box">Type Status:
+                    <input type="text" name="type_status" id="typeStat" value="{{this.type_status}}">
+                </label>
+                <br>
+                <label class="input_box">Sex:
+                    <input type="text" name="sex" id="sex" value="{{this.sex}}">
+                </label>
+                <br>
+                <label class="input_box">Image Name:
+                    <input type="text" name="image_name" id="imgName" value="{{this.image_name}}">
+                </label>
+                <label class="input_box">User ID:
+                    <input type="text" name="user_id" id="user_id" value="">
+                </label>
+                <br>
+                <input type="hidden" name="id" value={{this.id}}>
+                <input type ="submit" name="enter" id="enter" class="submitButton"> 
+            {{/each}} 
+            <script src="/js/addSpecimenScript.js"></script>
+        </fieldset> 
+    </form>
+</body>

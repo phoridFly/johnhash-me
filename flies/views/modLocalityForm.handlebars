@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify Locality</title>
+    <link rel="stylesheet" href="/css/tableStyle.css" type="text/css">
+</head>
+<body>
+    <h2>Modify Locality</h2>
+    <p id="navBar">
+        <button class="submitButton"><a id="home" href ="http://johnhash.me/authorized/admin.html">DB HOME</a></button> 
+        <button class="submitButton"><a id="modify" href="http://johnhash.me/authorized/modify.html">BACK TO TABLES</a></button>
+    </p>
+    <br>
+    <p id="navBar">
+        | 
+        <button class="submitButton"><a href="http://johnhash.me/flies/modLocality" id="modLocality">BACK</a></button>
+         | 
+    </p>
+    <br>
+    <form id="modLocalityForm" action="http://johnhash.me/flies/updateLocalitySubmit">
+        <fieldset>
+            {{#each items}}
+            <legend>Modify Locality #{{this.id}}: {{this.place}}, {{this.region}}, {{this.country}}</legend>
+                <label class="input_box">Country:
+                    <input type="text" name="country" id="country" value="{{this.country}}">
+                </label>
+                <label class="input_box">Region:
+                    <input type="text" name="region" id="region" value="{{this.region}}">
+                </label>
+                <label class="input_box">Place:
+                    <input type="text" name="place" id="place" value="{{this.place}}">
+                </label>
+                <label class="input_box">Longitude:
+                    <input type="number" step = "any" name="longitude" id="longitude" value="{{this.longitude}}">
+                </label>
+                <label class="input_box">Latitude:
+                    <input type="number" step = "any" name="latitude" id="latitude" value="{{this.latitude}}">
+                </label>
+                <label class="input_box">Elevation:
+                    <input type="number" name="elevation" id="elevation" value="{{this.elevation}}">
+                </label>
+                <input type="hidden" name="id" value={{this.id}}>
+                <input type ="submit" name="enter" id="enter"> 
+            {{/each}} 
+        </fieldset> 
+    </form>
+</body>

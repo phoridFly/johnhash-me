@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" type="text/css">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div id="input">
+            <canvas id="myCanvas" width="697" height="522"
+                style="border:1px solid #c3c3c3;" >
+                Your browser does not support the canvas element.
+            </canvas>
+        </div>
+        <div id="output">
+            <p>Output coordinates</p>
+            <p id="lm">LM=32</p>
+            <div id="coordinates">
+                
+            </div>
+        </div>
+    </div>  
+    <div id="originalImage">
+        <img id="wingImage" width="697" height="522" src="images/MH1_1_M_globipyga_wing.jpg" alt="wing">
+    </div>
+    
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
