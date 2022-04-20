@@ -1555,13 +1555,14 @@ app.get('/flies/localityDropdown', function(request, response, next){
  **********************************************************************/
 
 
-app.listen();
+//app.listen();
 
 
 // remove for production
-// app.listen(port, () => {
-//    console.log('Express started on ' + port + '; press Ctrl-C to terminate.');
-// });
+const port = 8080;
+app.listen(port, () => {
+   console.log('Express started on ' + port + '; press Ctrl-C to terminate.');
+});
 
 // APP USE 404 or 500 error
 
