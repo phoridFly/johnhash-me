@@ -51,7 +51,6 @@ app.use(function(req, res, next) {
 app.use('/flies/species/', require('./routes/routes_species'));
 
 
-
 // GET route for ALL SPECIES in the DB
 // Page Needs:
 // ID | Family | Genus | Specific_Epithet | Year | Diagnosis | Image
@@ -85,60 +84,60 @@ app.use('/flies/species/', require('./routes/routes_species'));
 //     });
 // });
 
-app.get('/flies/speciesInfo', function(request, response, next){
+// app.get('/flies/speciesInfo', function(request, response, next){
 
-    //console.log("before mysql query");
+//     //console.log("before mysql query");
 
-    let context = {};
+//     let context = {};
 
-    let speciesQuery = 'SELECT people.first_name, people.last_name, species.id, species.genus, species.specific_epithet, species.year, species.diagnosis, species.habitus_image FROM people INNER JOIN species_people ON species_people.people_id = people.id INNER JOIN species ON species.id = species_people.species_id WHERE species.id = ?';
+//     let speciesQuery = 'SELECT people.first_name, people.last_name, species.id, species.genus, species.specific_epithet, species.year, species.diagnosis, species.habitus_image FROM people INNER JOIN species_people ON species_people.people_id = people.id INNER JOIN species ON species.id = species_people.species_id WHERE species.id = ?';
 
-    mysql.pool.query(speciesQuery, [request.query.id],function(error, speciesInfo, fields){
-        if (error) {
-            next(error);
-            return;
-        }
+//     mysql.pool.query(speciesQuery, [request.query.id],function(error, speciesInfo, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
         
-        let data = [];
-        for (let x in speciesInfo){
-            let speciesData = {'first_name': speciesInfo[x].first_name, 'last_name': speciesInfo[x].last_name,'id': speciesInfo[x].id, 'genus': speciesInfo[x].genus, 'specific_epithet': speciesInfo[x].specific_epithet, 'year': speciesInfo[x].year, 'diagnosis': speciesInfo[x].diagnosis, 'habitus_image': speciesInfo[x].habitus_image};
-            data.push(speciesData);
-        }
-        //console.log("after mysql query");
+//         let data = [];
+//         for (let x in speciesInfo){
+//             let speciesData = {'first_name': speciesInfo[x].first_name, 'last_name': speciesInfo[x].last_name,'id': speciesInfo[x].id, 'genus': speciesInfo[x].genus, 'specific_epithet': speciesInfo[x].specific_epithet, 'year': speciesInfo[x].year, 'diagnosis': speciesInfo[x].diagnosis, 'habitus_image': speciesInfo[x].habitus_image};
+//             data.push(speciesData);
+//         }
+//         //console.log("after mysql query");
         
-        context.items = JSON.stringify(data);
-        //console.log(context.items);
-        response.send(context.items);
+//         context.items = JSON.stringify(data);
+//         //console.log(context.items);
+//         response.send(context.items);
 
-    });
-});
+//     });
+// });
 
-app.get('/flies/speciesCountryFound', function(request, response, next){
+// app.get('/flies/speciesCountryFound', function(request, response, next){
 
-    //console.log("before mysql query");
+//     //console.log("before mysql query");
 
-    let context = {};
+//     let context = {};
 
-    let specCountryFoundQuery = "SELECT DISTINCT locality.country, locality.longitude, locality.latitude FROM locality INNER JOIN collecting_event ON locality.id = collecting_event.locality_id INNER JOIN specimen ON collecting_event.id = specimen.collecting_event_id INNER JOIN species ON specimen.species_id = species.id WHERE species.id =? AND collecting_event.id <> '640'";
-    mysql.pool.query(specCountryFoundQuery,[request.query.id],function(error, speciesCountryFound, fields) {
-        if (error) {
-            next(error);
-            return;
-        }
+//     let specCountryFoundQuery = "SELECT DISTINCT locality.country, locality.longitude, locality.latitude FROM locality INNER JOIN collecting_event ON locality.id = collecting_event.locality_id INNER JOIN specimen ON collecting_event.id = specimen.collecting_event_id INNER JOIN species ON specimen.species_id = species.id WHERE species.id =? AND collecting_event.id <> '640'";
+//     mysql.pool.query(specCountryFoundQuery,[request.query.id],function(error, speciesCountryFound, fields) {
+//         if (error) {
+//             next(error);
+//             return;
+//         }
 
-        let data = [];
-        for (let x in speciesCountryFound){
-            let speciesData = {'country': speciesCountryFound[x].country, 'longitude': speciesCountryFound[x].longitude, 'latitude': speciesCountryFound[x].latitude};
-            data.push(speciesData);
-        }
-        //console.log("after mysql query");
+//         let data = [];
+//         for (let x in speciesCountryFound){
+//             let speciesData = {'country': speciesCountryFound[x].country, 'longitude': speciesCountryFound[x].longitude, 'latitude': speciesCountryFound[x].latitude};
+//             data.push(speciesData);
+//         }
+//         //console.log("after mysql query");
         
-        context.items = JSON.stringify(data);
-        //console.log(context.items);
-        response.send(context.items);
+//         context.items = JSON.stringify(data);
+//         //console.log(context.items);
+//         response.send(context.items);
 
-    });
-});
+//     });
+// });
 
 // this will setup the key for the genus we want
 app.get('/flies/keyCharacters', function(request, response, next){

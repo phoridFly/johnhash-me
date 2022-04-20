@@ -77,5 +77,33 @@ module.exports =
                 return resolve(element);
             }); 
         });
-    }
+    },
+    getSpeciesDistinctOccurance : getSpeciesDistinctOccurance = (req) =>
+    {
+        let speciesQuery = `
+        SELECT DISTINCT 
+            locality.country, 
+            locality.longitude, 
+            locality.latitude 
+        FROM 
+            locality 
+        INNER JOIN 
+            collecting_event ON locality.id = collecting_event.locality_id 
+        INNER JOIN 
+            specimen ON collecting_event.id = specimen.collecting_event_id 
+        INNER JOIN 
+            species ON specimen.species_id = species.id 
+        WHERE 
+            species.id =? AND collecting_event.id <> '640'
+        `;
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(speciesQuery, [req.query.id], (error, element) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(element);
+            }); 
+        });
+    },
 };
