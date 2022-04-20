@@ -29,7 +29,8 @@ const oreophilophoraKeyCharacters = ["pairs_of_supraantennals", "eye_size","cost
 
 const pseudomyriophoraKeyCharacters = ["pairs_of_supraantennals", "lower_interfrontals_position", "vein_sc", "hind_femur_maculation"];
 
-
+const {getAllSpeciesByGenus} = require('./db_functions/functions_species.js');
+const { response } = require('express');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); 
@@ -47,6 +48,13 @@ app.use(function(req, res, next) {
 
 // SELECT ONLY QUERIES
 
+
+app.get('/flies/species', async (req, res, next) => {
+
+    const out = await getAllSpeciesByGenus(req);
+    res.send(out);
+    
+});
 // GET route for ALL SPECIES in the DB
 // Page Needs:
 // ID | Family | Genus | Specific_Epithet | Year | Diagnosis | Image
