@@ -9,15 +9,15 @@ var mysql = require('./dbcon.js');
 // var mysql = require('./dbconDev.js');
 
 var app = express();
-var exphbs = require('express-handlebars').create({defaultLayout:'main'});
-app.use(express.static(__dirname + '/public'));
+//var exphbs = require('express-handlebars').create({defaultLayout:'main'});
+//app.use(express.static(__dirname + '/public'));
 
 // remove for production
 //const port = 3000;
 
 
-app.engine('handlebars', exphbs.engine);
-app.set('view engine', 'handlebars');
+//app.engine('handlebars', exphbs.engine);
+//app.set('view engine', 'handlebars');
 
 // secret key for being able to update the db from the app
 const CONSTANTS = require('./constants.js');
@@ -29,7 +29,6 @@ const oreophilophoraKeyCharacters = ["pairs_of_supraantennals", "eye_size","cost
 
 const pseudomyriophoraKeyCharacters = ["pairs_of_supraantennals", "lower_interfrontals_position", "vein_sc", "hind_femur_maculation"];
 
-const {getAllSpeciesByGenus} = require('./db_functions/functions_species.js');
 const { response } = require('express');
 
 app.use(function(req, res, next) {
@@ -48,45 +47,43 @@ app.use(function(req, res, next) {
 
 // SELECT ONLY QUERIES
 
+// mount routes here
+app.use('/flies/species/', require('./routes/routes_species'));
 
-app.get('/flies/species', async (req, res, next) => {
 
-    const out = await getAllSpeciesByGenus(req);
-    res.send(out);
-    
-});
+
 // GET route for ALL SPECIES in the DB
 // Page Needs:
 // ID | Family | Genus | Specific_Epithet | Year | Diagnosis | Image
 // URL : http://johnhash.me:36666/speciesList
 // URL : http://johnhash.me/flies
-app.get('/flies/speciesList', function(request, response, next){
+// app.get('/flies/speciesList', function(request, response, next){
 
-    //console.log("before mysql query");
+//     //console.log("before mysql query");
 
-    let context = {};
-    //let selectedGenus = request.params.selectedGenus;
+//     let context = {};
+//     //let selectedGenus = request.params.selectedGenus;
 
-    //let speciesQuery = "SELECT species.id, species.genus, species.specific_epithet, species.habitus_image FROM species WHERE species.genus = '"+selectedGenus+"' GROUP BY genus, specific_epithet ASC";
-    let speciesQuery = 'SELECT species.id, species.genus, species.specific_epithet, species.habitus_image FROM species WHERE species.genus =? AND species.specific_epithet <> "Unidentified" GROUP BY genus, specific_epithet ASC';
+//     //let speciesQuery = "SELECT species.id, species.genus, species.specific_epithet, species.habitus_image FROM species WHERE species.genus = '"+selectedGenus+"' GROUP BY genus, specific_epithet ASC";
+//     let speciesQuery = 'SELECT species.id, species.genus, species.specific_epithet, species.habitus_image FROM species WHERE species.genus =? AND species.specific_epithet <> "Unidentified" GROUP BY genus, specific_epithet ASC';
 
-    mysql.pool.query(speciesQuery, [request.query.selectedGenus], function(error, speciesList, fields){
-        if (error) {
-            next(error);
-            return;
-        }
+//     mysql.pool.query(speciesQuery, [request.query.selectedGenus], function(error, speciesList, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
         
-        let data = [];
-        for (let x in speciesList){
-            let speciesData = {'id': speciesList[x].id, 'genus': speciesList[x].genus, 'specific_epithet': speciesList[x].specific_epithet, 'habitus_image': speciesList[x].habitus_image};
-            data.push(speciesData);
-        }
-        //console.log("after mysql query");
-        context.items = JSON.stringify(data);
-        response.send(context.items);
+//         let data = [];
+//         for (let x in speciesList){
+//             let speciesData = {'id': speciesList[x].id, 'genus': speciesList[x].genus, 'specific_epithet': speciesList[x].specific_epithet, 'habitus_image': speciesList[x].habitus_image};
+//             data.push(speciesData);
+//         }
+//         //console.log("after mysql query");
+//         context.items = JSON.stringify(data);
+//         response.send(context.items);
 
-    });
-});
+//     });
+// });
 
 app.get('/flies/speciesInfo', function(request, response, next){
 
@@ -1578,16 +1575,16 @@ app.listen(port, () => {
 //    res.render('modSpecimen');
 //});
 
-app.use(function(req,res){
-    res.status(404);
-    res.render('404');
-});
+// app.use(function(req,res){
+//     res.status(404);
+//     res.render('404');
+// });
   
-app.use(function(err, req, res, next){
-    console.error(err.stack);
-    res.status(500);
-    res.render('500');
-});
+// app.use(function(err, req, res, next){
+//     console.error(err.stack);
+//     res.status(500);
+//     res.render('500');
+// });
 
 
 //server.listen();
