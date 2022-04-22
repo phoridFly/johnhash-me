@@ -26,5 +26,4 @@ router.get('/distinct-occurrence-records', async (req, res, next) => {
     
 });
 
-
 module.exports = router;

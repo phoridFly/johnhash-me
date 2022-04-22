@@ -78,6 +78,11 @@ module.exports =
             }); 
         });
     },
+    /**
+     * Function getSpeciesDistinctOccurance returns all the dinstinct localities for given species id
+     * @query id    string
+     * @returns [array]
+     */
     getSpeciesDistinctOccurance : getSpeciesDistinctOccurance = (req) =>
     {
         let speciesQuery = `

@@ -49,6 +49,8 @@ app.use(function(req, res, next) {
 
 // mount routes here
 app.use('/flies/species/', require('./routes/routes_species'));
+app.use('/flies/specimens/', require('./routes/routes_specimens'));
+
 
 
 // GET route for ALL SPECIES in the DB
@@ -257,51 +259,51 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 //                  START SPECIMENS
 //
 
-app.get('/flies/modSpecimen', function(request, response, next){
+// app.get('/flies/modSpecimen', function(request, response, next){
 
-    let initialQuery = 'SELECT specimen.id, specimen.institution_code, specimen.collection_code, specimen.catalog_number, specimen.species_id, species.genus, '
-    + 'species.specific_epithet, specimen.collecting_event_id, locality.country, locality.place, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
-    + 'collecting_event.method, specimen.type_status, specimen.sex, specimen.image_name FROM specimen '
-    + 'INNER JOIN collecting_event ON specimen.collecting_event_id = collecting_event.id '
-    + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-    + 'INNER JOIN species ON specimen.species_id = species.id '
-    + 'ORDER BY species.specific_epithet, specimen.catalog_number';
+//     let initialQuery = 'SELECT specimen.id, specimen.institution_code, specimen.collection_code, specimen.catalog_number, specimen.species_id, species.genus, '
+//     + 'species.specific_epithet, specimen.collecting_event_id, locality.country, locality.place, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
+//     + 'collecting_event.method, specimen.type_status, specimen.sex, specimen.image_name FROM specimen '
+//     + 'INNER JOIN collecting_event ON specimen.collecting_event_id = collecting_event.id '
+//     + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//     + 'INNER JOIN species ON specimen.species_id = species.id '
+//     + 'ORDER BY species.specific_epithet, specimen.catalog_number';
 
-    mysql.pool.query(initialQuery, function(error, specimens, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(specimens);
-        response.render('modSpecimen', {
-            title: 'Modify Specimens in the Database',
-            specimens: specimens
-        });
-    });
+//     mysql.pool.query(initialQuery, function(error, specimens, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(specimens);
+//         response.render('modSpecimen', {
+//             title: 'Modify Specimens in the Database',
+//             specimens: specimens
+//         });
+//     });
 
-});
+// });
 
-app.get('/flies/updateSpecimen', function(request, response, next){
+// app.get('/flies/updateSpecimen', function(request, response, next){
 
-    let initialQuery = 'SELECT specimen.id, specimen.institution_code, specimen.collection_code, specimen.catalog_number, specimen.species_id, species.genus, '
-    + 'species.specific_epithet, specimen.collecting_event_id, locality.country, locality.place, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
-    + 'collecting_event.method, specimen.type_status, specimen.sex, specimen.image_name FROM specimen '
-    + 'INNER JOIN collecting_event ON specimen.collecting_event_id = collecting_event.id '
-    + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-    + 'INNER JOIN species ON specimen.species_id = species.id WHERE specimen.id=?';
+//     let initialQuery = 'SELECT specimen.id, specimen.institution_code, specimen.collection_code, specimen.catalog_number, specimen.species_id, species.genus, '
+//     + 'species.specific_epithet, specimen.collecting_event_id, locality.country, locality.place, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
+//     + 'collecting_event.method, specimen.type_status, specimen.sex, specimen.image_name FROM specimen '
+//     + 'INNER JOIN collecting_event ON specimen.collecting_event_id = collecting_event.id '
+//     + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//     + 'INNER JOIN species ON specimen.species_id = species.id WHERE specimen.id=?';
 
-    mysql.pool.query(initialQuery,[request.query.id], function(error, items, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(items);
-        response.render('modSpecimenForm', {
-            items: items
-        });
-    });
+//     mysql.pool.query(initialQuery,[request.query.id], function(error, items, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(items);
+//         response.render('modSpecimenForm', {
+//             items: items
+//         });
+//     });
 
-});
+// });
 
 app.get('/flies/updateSpecimenSubmit', function(request, response, next){
 
