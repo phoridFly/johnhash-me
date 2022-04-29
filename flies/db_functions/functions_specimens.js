@@ -57,7 +57,7 @@ module.exports =
             }); 
         });
     },
-        /**
+    /**
      * Function getAllSpecimens returns all the specimen information in the database
      * @returns [array]       Array of specimen objects
      */
@@ -96,6 +96,50 @@ module.exports =
 
         return new Promise((resolve, reject) => {
             mysql.pool.query(specimentQuery, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
+    },
+    /**
+     * Function updateSpecimen
+     * @param {string} id
+     * @returns nothing
+     */
+    updateSpecimen : updateSpecimen = (req) =>
+    {
+        let updateQuery = `
+        UPDATE 
+            specimen 
+        SET 
+            institution_code =?, 
+            collection_code =?, 
+            catalog_number =?, 
+            species_id =?, 
+            collecting_event_id =?, 
+            type_status =?, 
+            sex =?, 
+            image_name =? 
+        WHERE 
+            id =?
+        `;
+
+        let params = [
+            req.body.institution_code, 
+            req.body.collection_code, 
+            req.body.catalog_number, 
+            req.body.species_id, 
+            req.body.collecting_event_id, 
+            req.body.type_status, 
+            req.body.sex, 
+            req.body.image_name, 
+            req.query.id 
+        ];
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.body(updateQuery, params, (error, elements) => {
                 if(error) {
                     return reject(error);
                 }

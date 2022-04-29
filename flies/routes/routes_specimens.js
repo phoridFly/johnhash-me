@@ -17,4 +17,17 @@ router.get('/', async (req, res, next) => {
     
 });
 
+router.put('/', async (req, res, next) => {
+
+    console.log("HERE");
+    console.log(req);
+    console.log(req.query);
+    console.log(req.body);
+
+    await updateSpecimen(req);
+
+    //res.send(out);
+    
+});
+
 module.exports = router;
