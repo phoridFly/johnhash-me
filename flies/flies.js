@@ -1,6 +1,7 @@
 
 
 var express = require('express');
+var bodyParser = require('body-parser');
 
 // below is for production
 var mysql = require('./dbcon.js');
@@ -9,6 +10,11 @@ var mysql = require('./dbcon.js');
 // var mysql = require('./dbconDev.js');
 
 var app = express();
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 //var exphbs = require('express-handlebars').create({defaultLayout:'main'});
 //app.use(express.static(__dirname + '/public'));
 
@@ -305,66 +311,66 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 
 // });
 
-app.get('/flies/updateSpecimenSubmit', function(request, response, next){
+// app.get('/flies/updateSpecimenSubmit', function(request, response, next){
 
-    if (request.query.user_id == CONSTANTS.appID) {
+//     if (request.query.user_id == CONSTANTS.appID) {
 
-        mysql.pool.query("UPDATE specimen SET institution_code =?, collection_code =?, catalog_number =?, species_id =?, collecting_event_id =?, type_status =?, sex =?, image_name =? WHERE id =?",
-        [request.query.institution_code, request.query.collection_code, request.query.catalog_number, request.query.species_id, request.query.collecting_event_id, request.query.type_status, request.query.sex, request.query.image_name, request.query.id],
-        function(error, result){
-            if (error) {
-                next(error);
-                return;
-            }
+//         mysql.pool.query("UPDATE specimen SET institution_code =?, collection_code =?, catalog_number =?, species_id =?, collecting_event_id =?, type_status =?, sex =?, image_name =? WHERE id =?",
+//         [request.query.institution_code, request.query.collection_code, request.query.catalog_number, request.query.species_id, request.query.collecting_event_id, request.query.type_status, request.query.sex, request.query.image_name, request.query.id],
+//         function(error, result){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
 
-            let initialQuery = 'SELECT specimen.id, specimen.institution_code, specimen.collection_code, specimen.catalog_number, specimen.species_id, species.genus, '
-            + 'species.specific_epithet, specimen.collecting_event_id, locality.country, locality.place, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date,'
-            + 'specimen.type_status, specimen.sex, specimen.image_name FROM specimen '
-            + 'INNER JOIN collecting_event ON specimen.collecting_event_id = collecting_event.id '
-            + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-            + 'INNER JOIN species ON specimen.species_id = species.id '
-            + 'ORDER BY species.specific_epithet, specimen.catalog_number';
+//             let initialQuery = 'SELECT specimen.id, specimen.institution_code, specimen.collection_code, specimen.catalog_number, specimen.species_id, species.genus, '
+//             + 'species.specific_epithet, specimen.collecting_event_id, locality.country, locality.place, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date,'
+//             + 'specimen.type_status, specimen.sex, specimen.image_name FROM specimen '
+//             + 'INNER JOIN collecting_event ON specimen.collecting_event_id = collecting_event.id '
+//             + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//             + 'INNER JOIN species ON specimen.species_id = species.id '
+//             + 'ORDER BY species.specific_epithet, specimen.catalog_number';
 
-            mysql.pool.query(initialQuery, function(error, specimens, fields){
-                if (error) {
-                    next(error);
-                    return;
-                }
-                //console.log('select all');
-                response.render('modSpecimen', {
-                    title: 'Modify Specimens in the Database',
-                    specimens: specimens    
-                });
-            });
-        });
+//             mysql.pool.query(initialQuery, function(error, specimens, fields){
+//                 if (error) {
+//                     next(error);
+//                     return;
+//                 }
+//                 //console.log('select all');
+//                 response.render('modSpecimen', {
+//                     title: 'Modify Specimens in the Database',
+//                     specimens: specimens    
+//                 });
+//             });
+//         });
 
-    }
+//     }
 
-    else {
+//     else {
 
-        let initialQuery = 'SELECT specimen.id, specimen.institution_code, specimen.collection_code, specimen.catalog_number, specimen.species_id, species.genus, '
-        + 'species.specific_epithet, specimen.collecting_event_id, locality.country, locality.place, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date,'
-        + 'specimen.type_status, specimen.sex, specimen.image_name FROM specimen '
-        + 'INNER JOIN collecting_event ON specimen.collecting_event_id = collecting_event.id '
-        + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-        + 'INNER JOIN species ON specimen.species_id = species.id '
-        + 'ORDER BY species.specific_epithet, specimen.catalog_number';
+//         let initialQuery = 'SELECT specimen.id, specimen.institution_code, specimen.collection_code, specimen.catalog_number, specimen.species_id, species.genus, '
+//         + 'species.specific_epithet, specimen.collecting_event_id, locality.country, locality.place, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date,'
+//         + 'specimen.type_status, specimen.sex, specimen.image_name FROM specimen '
+//         + 'INNER JOIN collecting_event ON specimen.collecting_event_id = collecting_event.id '
+//         + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//         + 'INNER JOIN species ON specimen.species_id = species.id '
+//         + 'ORDER BY species.specific_epithet, specimen.catalog_number';
 
-        mysql.pool.query(initialQuery, function(error, specimens, fields){
-            if (error) {
-                next(error);
-                return;
-            }
-            //console.log('select all');
-            response.render('modSpecimen', {
-                title: 'Modify Specimens in the Database',
-                specimens: specimens    
-            });
-        });
+//         mysql.pool.query(initialQuery, function(error, specimens, fields){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
+//             //console.log('select all');
+//             response.render('modSpecimen', {
+//                 title: 'Modify Specimens in the Database',
+//                 specimens: specimens    
+//             });
+//         });
 
-    }
+//     }
 
-});
+// });
 
 //
 //                  END SPECIMENS
@@ -374,87 +380,87 @@ app.get('/flies/updateSpecimenSubmit', function(request, response, next){
 //                  START SPECIES
 //
 
-app.get('/flies/modSpecies', function(request, response, next){
+// app.get('/flies/modSpecies', function(request, response, next){
 
-    let initialQuery = 'SELECT id, family, genus, specific_epithet, year FROM species';
+//     let initialQuery = 'SELECT id, family, genus, specific_epithet, year FROM species';
 
-    mysql.pool.query(initialQuery, function(error, species, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        response.render('modSpecies', {
-            title: 'Modify Species in the Database',
-            species: species
-        });
-    });
+//     mysql.pool.query(initialQuery, function(error, species, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         response.render('modSpecies', {
+//             title: 'Modify Species in the Database',
+//             species: species
+//         });
+//     });
 
-});
+// });
 
-app.get('/flies/updateSpecies', function(request, response, next){
+// app.get('/flies/updateSpecies', function(request, response, next){
 
-    let initialQuery = 'SELECT id, family, genus, specific_epithet, year FROM species WHERE id=?';
+//     let initialQuery = 'SELECT id, family, genus, specific_epithet, year FROM species WHERE id=?';
 
-    mysql.pool.query(initialQuery,[request.query.id], function(error, items, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(items);
-        response.render('modSpeciesForm', {
-            items: items
-        });
-    });
+//     mysql.pool.query(initialQuery,[request.query.id], function(error, items, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(items);
+//         response.render('modSpeciesForm', {
+//             items: items
+//         });
+//     });
 
-});
+// });
 
-app.get('/flies/updateSpeciesSubmit', function(request, response, next){
+// app.get('/flies/updateSpeciesSubmit', function(request, response, next){
 
-    if (request.query.user_id == CONSTANTS.appID) {
+//     if (request.query.user_id == CONSTANTS.appID) {
 
-        mysql.pool.query("UPDATE species SET family =?, genus =?, specific_epithet =?, year =? WHERE id =?",
-        [request.query.family, request.query.genus, request.query.specific_epithet, request.query.year, request.query.id],
-        function(error, result){
-            if (error) {
-                next(error);
-                return;
-            }
+//         mysql.pool.query("UPDATE species SET family =?, genus =?, specific_epithet =?, year =? WHERE id =?",
+//         [request.query.family, request.query.genus, request.query.specific_epithet, request.query.year, request.query.id],
+//         function(error, result){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
 
-            let initialQuery = 'SELECT id, family, genus, specific_epithet, year FROM species';
+//             let initialQuery = 'SELECT id, family, genus, specific_epithet, year FROM species';
 
-            mysql.pool.query(initialQuery, function(error, species, fields){
-                if (error) {
-                    next(error);
-                    return;
-                }
-                //console.log('select all');
-                response.render('modSpecies', {
-                    title: 'Modify Species in the Database',
-                    species: species
-                });
-            });
-        });
-    }
+//             mysql.pool.query(initialQuery, function(error, species, fields){
+//                 if (error) {
+//                     next(error);
+//                     return;
+//                 }
+//                 //console.log('select all');
+//                 response.render('modSpecies', {
+//                     title: 'Modify Species in the Database',
+//                     species: species
+//                 });
+//             });
+//         });
+//     }
 
-    else {
+//     else {
 
-        let initialQuery = 'SELECT id, family, genus, specific_epithet, year FROM species';
+//         let initialQuery = 'SELECT id, family, genus, specific_epithet, year FROM species';
 
-        mysql.pool.query(initialQuery, function(error, species, fields){
-            if (error) {
-                next(error);
-                return;
-            }
-            //console.log('select all');
-            response.render('modSpecies', {
-                title: 'Modify Species in the Database',
-                species: species
-            });
-        });
+//         mysql.pool.query(initialQuery, function(error, species, fields){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
+//             //console.log('select all');
+//             response.render('modSpecies', {
+//                 title: 'Modify Species in the Database',
+//                 species: species
+//             });
+//         });
 
-    }
+//     }
 
-});
+// });
 
 
 //

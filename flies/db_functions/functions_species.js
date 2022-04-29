@@ -17,6 +17,36 @@ module.exports =
      * @query-params {string} genus
      * @returns [array]       Array of species objects
      */
+    getAllSpecies : getAllSpecies = (req) =>
+    {
+        let speciesQuery = `
+            SELECT 
+                species.id, 
+                species.genus, 
+                species.specific_epithet, 
+                species.habitus_image 
+            FROM 
+                species 
+            WHERE 
+                species.specific_epithet <> "Unidentified" 
+            GROUP BY 
+                genus, specific_epithet ASC
+            `;
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(speciesQuery, [], (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
+    },
+    /**
+     * Function getAllSpeciesByGenus returns all the species information in the database
+     * @query-params {string} genus
+     * @returns [array]       Array of species objects
+     */
     getAllSpeciesByGenus : getAllSpeciesByGenus = (req) =>
     {
         let speciesQuery = `
@@ -111,4 +141,40 @@ module.exports =
             }); 
         });
     },
+        /**
+     * Function updateSpecies
+     * @param {string} id
+     * @returns nothing
+     */
+    updateSpecies : updateSpecies = (req) =>
+    {
+        let updateQuery = `
+        UPDATE 
+            species 
+        SET 
+            family =?, 
+            genus =?, 
+            specific_epithet =?, 
+            year =? 
+        WHERE 
+            id =?
+        `;
+
+        let params = [
+            req.body.family, 
+            req.body.genus, 
+            req.body.specific_epithet, 
+            req.body.year, 
+            req.query.id
+        ];
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(updateQuery, params, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
+    }
 };

@@ -139,7 +139,7 @@ module.exports =
         ];
 
         return new Promise((resolve, reject) => {
-            mysql.pool.body(updateQuery, params, (error, elements) => {
+            mysql.pool.query(updateQuery, params, (error, elements) => {
                 if(error) {
                     return reject(error);
                 }
