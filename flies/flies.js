@@ -56,6 +56,7 @@ app.use(function(req, res, next) {
 // mount routes here
 app.use('/flies/species/', require('./routes/routes_species'));
 app.use('/flies/specimens/', require('./routes/routes_specimens'));
+app.use('/flies/people/', require('./routes/routes_people'));
 
 
 
@@ -472,40 +473,40 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 //
 
 
-app.get('/flies/modPeople', function(request, response, next){
+// app.get('/flies/modPeople', function(request, response, next){
 
-    let initialQuery = 'SELECT people.id, people.first_name, people.last_name FROM people';
+//     let initialQuery = 'SELECT people.id, people.first_name, people.last_name FROM people';
 
-    mysql.pool.query(initialQuery, function(error, people, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(people);
-        response.render('modPeople', {
-            title: 'Modify People in the Database',
-            people: people
-        });
-    });
+//     mysql.pool.query(initialQuery, function(error, people, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(people);
+//         response.render('modPeople', {
+//             title: 'Modify People in the Database',
+//             people: people
+//         });
+//     });
 
-});
+// });
 
-app.get('/flies/updatePeople', function(request, response, next){
+// app.get('/flies/updatePeople', function(request, response, next){
 
-    let initialQuery = 'SELECT people.id, people.first_name, people.last_name FROM people WHERE id=?';
+//     let initialQuery = 'SELECT people.id, people.first_name, people.last_name FROM people WHERE id=?';
 
-    mysql.pool.query(initialQuery,[request.query.id], function(error, items, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(items);
-        response.render('modPeopleForm', {
-            items: items
-        });
-    });
+//     mysql.pool.query(initialQuery,[request.query.id], function(error, items, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(items);
+//         response.render('modPeopleForm', {
+//             items: items
+//         });
+//     });
 
-});
+// });
 
 app.get('/flies/updatePeopleSubmit', function(request, response, next){
 
