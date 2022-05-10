@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
 
     const out = {};
     //console.log(req.query);
-    if (req.query.id) { out.specimenDetails = await getSpecimenById(req); } 
+    if (req.query.id) { out.specimen = await getSpecimenById(req); } 
     else { out.specimens = await getAllSpecimens(req); } 
 
     res.send(out);

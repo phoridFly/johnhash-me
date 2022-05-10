@@ -48,4 +48,35 @@ module.exports =
         });
 
     },
+    /* Function updatePerson
+    * @param {string} id
+    * @returns nothing
+    */
+   updatePerson : updatePerson = (req) =>
+   {
+       let updateQuery = `
+       UPDATE
+           people
+       SET
+           first_name =?,
+           last_name =?
+       WHERE
+           id =?
+       `;
+
+       let params = [
+           req.body.first_name, 
+           req.body.last_name, 
+           req.query.id
+       ];
+
+       return new Promise((resolve, reject) => {
+           mysql.pool.query(updateQuery, params, (error, elements) => {
+               if(error) {
+                   return reject(error);
+               }
+               return resolve(elements);
+           }); 
+       });
+   }
 }

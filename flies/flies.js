@@ -57,6 +57,7 @@ app.use(function(req, res, next) {
 app.use('/flies/species/', require('./routes/routes_species'));
 app.use('/flies/specimens/', require('./routes/routes_specimens'));
 app.use('/flies/people/', require('./routes/routes_people'));
+app.use('/flies/localities', require('./routes/routes_localities'));
 
 
 
@@ -508,52 +509,52 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 
 // });
 
-app.get('/flies/updatePeopleSubmit', function(request, response, next){
+// app.get('/flies/updatePeopleSubmit', function(request, response, next){
 
-    // check if the user submitted the correct id
-    if (request.query.user_id == CONSTANTS.appID) {
+//     // check if the user submitted the correct id
+//     if (request.query.user_id == CONSTANTS.appID) {
 
-        mysql.pool.query("UPDATE people SET first_name =?, last_name =? WHERE id =?",
-        [request.query.first_name, request.query.last_name, request.query.id],
-        function(error, result){
-            if (error) {
-                next(error);
-                return;
-            }
+//         mysql.pool.query("UPDATE people SET first_name =?, last_name =? WHERE id =?",
+//         [request.query.first_name, request.query.last_name, request.query.id],
+//         function(error, result){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
         
 
-            let initialQuery = 'SELECT people.id, people.first_name, people.last_name FROM people';
+//             let initialQuery = 'SELECT people.id, people.first_name, people.last_name FROM people';
 
-            mysql.pool.query(initialQuery, function(error, people, fields){
-                if (error) {
-                    next(error);
-                    return;
-                }
-                response.render('modPeople', {
-                    title: 'Modify People in the Database',
-                    people: people
-                });
-            });
-        });
+//             mysql.pool.query(initialQuery, function(error, people, fields){
+//                 if (error) {
+//                     next(error);
+//                     return;
+//                 }
+//                 response.render('modPeople', {
+//                     title: 'Modify People in the Database',
+//                     people: people
+//                 });
+//             });
+//         });
 
-    }
-    else {
-        response.status(401);
-        let initialQuery = 'SELECT people.id, people.first_name, people.last_name FROM people';
+//     }
+//     else {
+//         response.status(401);
+//         let initialQuery = 'SELECT people.id, people.first_name, people.last_name FROM people';
 
-        mysql.pool.query(initialQuery, function(error, people, fields){
-            if (error) {
-                next(error);
-                return;
-            }
-            response.render('modPeople', {
-                title: 'Modify People in the Database',
-                people: people
-            });
-        });
-    }
+//         mysql.pool.query(initialQuery, function(error, people, fields){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
+//             response.render('modPeople', {
+//                 title: 'Modify People in the Database',
+//                 people: people
+//             });
+//         });
+//     }
 
-});
+// });
 
 
 //
@@ -565,22 +566,22 @@ app.get('/flies/updatePeopleSubmit', function(request, response, next){
 //                  START LOCALITIES
 //
 
-app.get('/flies/modLocality', function(request, response, next){
+// app.get('/flies/modLocality', function(request, response, next){
 
-    let initialQuery = 'SELECT id, country, region, place, longitude, latitude, elevation FROM locality';
+//     let initialQuery = 'SELECT id, country, region, place, longitude, latitude, elevation FROM locality';
 
-    mysql.pool.query(initialQuery, function(error, locality, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        response.render('modLocality', {
-            title: 'Modify Localities in the Database',
-            locality: locality
-        });
-    });
+//     mysql.pool.query(initialQuery, function(error, locality, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         response.render('modLocality', {
+//             title: 'Modify Localities in the Database',
+//             locality: locality
+//         });
+//     });
 
-});
+// });
 
 app.get('/flies/updateLocality', function(request, response, next){
 

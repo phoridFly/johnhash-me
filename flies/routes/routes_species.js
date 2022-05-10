@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
     // console.log(req.query);
     if (req.query.genus) { out.species = await getAllSpeciesByGenus(req); } 
     else if (req.query.id) { out.speciesDetails = await getAllSpeciesInformation(req); } 
-    else { out.speciesDetails = await getAllSpecies(req); } 
+    else { out.species = await getAllSpecies(req); } 
 
 
     res.send(out);
@@ -23,8 +23,8 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/distinct-occurrence-records', async (req, res, next) => {
-
-    const out = await getSpeciesDistinctOccurance(req);
+    const out = {};
+    out.localties = await getSpeciesDistinctOccurance(req);
     //console.log(req.query);
     res.send(out);
     
