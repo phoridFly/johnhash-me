@@ -26,6 +26,41 @@ module.exports =
                 return resolve(elements);
             }); 
         });
+    },
+    updateLocality : updateLocality = (req) =>
+    {
 
-    }
+        let updateQuery = `
+            UPDATE 
+                locality 
+            SET 
+                country =?, 
+                region =?, 
+                place =?, 
+                longitude =?, 
+                latitude =?, 
+                elevation =? 
+            WHERE 
+                id =?
+        `;
+
+        let params = [
+            req.body.country, 
+            req.body.region, 
+            req.body.place, 
+            req.body.longitude, 
+            req.body.latitude, 
+            req.body.elevation, 
+            req.query.id
+        ]
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(updateQuery, params, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
+    },
 }

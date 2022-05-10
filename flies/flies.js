@@ -583,48 +583,48 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 
 // });
 
-app.get('/flies/updateLocality', function(request, response, next){
+// app.get('/flies/updateLocality', function(request, response, next){
 
-    let initialQuery = 'SELECT id, country, region, place, longitude, latitude, elevation FROM locality WHERE id=?';
+//     let initialQuery = 'SELECT id, country, region, place, longitude, latitude, elevation FROM locality WHERE id=?';
 
-    mysql.pool.query(initialQuery,[request.query.id], function(error, items, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(items);
-        response.render('modLocalityForm', {
-            items: items
-        });
-    });
+//     mysql.pool.query(initialQuery,[request.query.id], function(error, items, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(items);
+//         response.render('modLocalityForm', {
+//             items: items
+//         });
+//     });
 
-});
+// });
 
-app.get('/flies/updateLocalitySubmit', function(request, response, next){
+// app.get('/flies/updateLocalitySubmit', function(request, response, next){
 
-    mysql.pool.query("UPDATE locality SET country =?, region =?, place =?, longitude =?, latitude =?, elevation =? WHERE id =?",
-    [request.query.country, request.query.region, request.query.place, request.query.longitude, request.query.latitude, request.query.elevation, request.query.id],
-    function(error, result){
-        if (error) {
-            next(error);
-            return;
-        }
+//     mysql.pool.query("UPDATE locality SET country =?, region =?, place =?, longitude =?, latitude =?, elevation =? WHERE id =?",
+//     [request.query.country, request.query.region, request.query.place, request.query.longitude, request.query.latitude, request.query.elevation, request.query.id],
+//     function(error, result){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
 
-        let initialQuery = 'SELECT id, country, region, place, longitude, latitude, elevation FROM locality';
+//         let initialQuery = 'SELECT id, country, region, place, longitude, latitude, elevation FROM locality';
 
-        mysql.pool.query(initialQuery, function(error, locality, fields){
-            if (error) {
-                next(error);
-                return;
-            }
-            response.render('modLocality', {
-                title: 'Modify Localities in the Database',
-                locality: locality
-            });
-        });
-    });
+//         mysql.pool.query(initialQuery, function(error, locality, fields){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
+//             response.render('modLocality', {
+//                 title: 'Modify Localities in the Database',
+//                 locality: locality
+//             });
+//         });
+//     });
 
-});
+// });
 
 //
 //                  END LOCALITIES

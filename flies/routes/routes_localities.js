@@ -2,8 +2,8 @@ const router = require('express').Router();
 
 const 
 {
-    getAllLocalities
-   // getSpecimenById
+    getAllLocalities,
+    updateLocality
 } = require('../db_functions/functions_localities');
 
 router.get('/', async (req, res, next) => {
@@ -17,13 +17,13 @@ router.get('/', async (req, res, next) => {
     
 });
 
-// router.put('/', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
 
 
-//     await updateSpecimen(req);
+    await updateLocality(req);
 
-//     res.sendStatus(200);
+    res.sendStatus(200);
     
-// });
+});
 
 module.exports = router;
