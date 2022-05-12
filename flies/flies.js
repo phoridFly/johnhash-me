@@ -55,10 +55,13 @@ app.use(function(req, res, next) {
 
 // mount routes here
 app.use('/flies/species/', require('./routes/routes_species'));
+app.use('/flies/species/:sid/people/:pid', require('./routes/routes_authors'));
 app.use('/flies/specimens/', require('./routes/routes_specimens'));
 app.use('/flies/people/', require('./routes/routes_people'));
 app.use('/flies/localities', require('./routes/routes_localities'));
 app.use('/flies/collecting-events', require('./routes/routes_collecting_events'));
+
+
 
 
 
