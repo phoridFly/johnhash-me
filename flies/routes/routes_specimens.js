@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router({ mergeParams: true });
 
 const 
 {
@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
 
     const out = {};
     //console.log(req.query);
-    if (req.query.id) { out.specimen = await getSpecimenById(req); } 
+    if (req.params.id) { out.specimen = await getSpecimenById(req); } 
     else { out.specimens = await getAllSpecimens(req); } 
 
     res.send(out);

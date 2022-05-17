@@ -55,11 +55,16 @@ app.use(function(req, res, next) {
 
 // mount routes here
 app.use('/flies/species/', require('./routes/routes_species'));
+app.use('/flies/species/:id', require('./routes/routes_species'));
 app.use('/flies/species/:sid/people/:pid', require('./routes/routes_authors'));
 app.use('/flies/specimens/', require('./routes/routes_specimens'));
+app.use('/flies/specimens/:id', require('./routes/routes_specimens'));
 app.use('/flies/people/', require('./routes/routes_people'));
+app.use('/flies/people/:id', require('./routes/routes_people'));
 app.use('/flies/localities', require('./routes/routes_localities'));
 app.use('/flies/collecting-events', require('./routes/routes_collecting_events'));
+app.use('/flies/collecting-events/:id', require('./routes/routes_collecting_events'));
+
 
 
 
@@ -640,25 +645,25 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 //
 
 
-app.get('/flies/modCollectingEvent', function(request, response, next){
+// app.get('/flies/modCollectingEvent', function(request, response, next){
 
-    let initialQuery = 'SELECT collecting_event.id, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, collecting_event.method, '
-    + 'locality.country, locality.region, locality.place FROM collecting_event '
-    + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-    + 'ORDER BY collecting_event.id ASC';
+//     let initialQuery = 'SELECT collecting_event.id, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, collecting_event.method, '
+//     + 'locality.country, locality.region, locality.place FROM collecting_event '
+//     + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//     + 'ORDER BY collecting_event.id ASC';
 
-    mysql.pool.query(initialQuery, function(error, event, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        response.render('modCollectingEvent', {
-            title: 'Modify Collecting Events in the Database',
-            event: event
-        });
-    });
+//     mysql.pool.query(initialQuery, function(error, event, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         response.render('modCollectingEvent', {
+//             title: 'Modify Collecting Events in the Database',
+//             event: event
+//         });
+//     });
 
-});
+// });
 
 app.get('/flies/updateCollectingEvent', function(request, response, next){
 
@@ -853,27 +858,27 @@ app.get('/flies/modAuthor', function(request, response, next){
 
 });
 
-app.get('/flies/updateAuthor', function(request, response, next){
+// app.get('/flies/updateAuthor', function(request, response, next){
 
-    let initialQuery = 'SELECT people.first_name, people.last_name, '
-    + 'species.family, species.genus, species.specific_epithet, species.year, species_people.people_id, species_people.species_id FROM people '
-    + 'INNER JOIN species_people ON people.id = species_people.people_id '
-    + 'INNER JOIN species ON species_people.species_id = species.id '
-    + 'WHERE species_people.species_id =? AND species_people.people_id =? '
-    + 'ORDER BY species.specific_epithet LIMIT 1';
+//     let initialQuery = 'SELECT people.first_name, people.last_name, '
+//     + 'species.family, species.genus, species.specific_epithet, species.year, species_people.people_id, species_people.species_id FROM people '
+//     + 'INNER JOIN species_people ON people.id = species_people.people_id '
+//     + 'INNER JOIN species ON species_people.species_id = species.id '
+//     + 'WHERE species_people.species_id =? AND species_people.people_id =? '
+//     + 'ORDER BY species.specific_epithet LIMIT 1';
 
-    mysql.pool.query(initialQuery,[request.query.species_id, request.query.people_id], function(error, people, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(people);
-        response.render('modAuthorForm', {
-            people: people
-        });
-    });
+//     mysql.pool.query(initialQuery,[request.query.species_id, request.query.people_id], function(error, people, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(people);
+//         response.render('modAuthorForm', {
+//             people: people
+//         });
+//     });
 
-});
+// });
 
 app.get('/flies/updateAuthorSubmit', function(request, response, next){
 

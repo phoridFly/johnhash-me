@@ -49,7 +49,7 @@ module.exports =
         `;
 
         return new Promise((resolve, reject) => {
-            mysql.pool.query(specimenQuery, [req.query.id], (error, elements) => {
+            mysql.pool.query(specimenQuery, [req.params.id], (error, elements) => {
                 if(error) {
                     return reject(error);
                 }

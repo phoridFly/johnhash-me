@@ -100,7 +100,7 @@ module.exports =
             `;
 
         return new Promise((resolve, reject) => {
-            mysql.pool.query(speciesQuery, [req.query.id], (error, element) => {
+            mysql.pool.query(speciesQuery, [req.params.id], (error, element) => {
                 if(error) {
                     return reject(error);
                 }
@@ -165,7 +165,7 @@ module.exports =
             req.body.genus, 
             req.body.specific_epithet, 
             req.body.year, 
-            req.query.id
+            req.params.id
         ];
 
         return new Promise((resolve, reject) => {

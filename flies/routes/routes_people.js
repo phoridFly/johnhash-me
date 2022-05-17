@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router({ mergeParams: true });
 
 const
 {
@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
 
     const out = {};
     //console.log(req.query);
-    if (req.query.id) { out.person = await getPersonById(req); } 
+    if (req.params.id) { out.person = await getPersonById(req); } 
     else { out.people = await getAllPeople(req); } 
 
     res.send(out);

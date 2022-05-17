@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router({ mergeParams: true });
 
 const 
 {
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
     const out = {};
     // console.log(req.query);
     if (req.query.genus) { out.species = await getAllSpeciesByGenus(req); } 
-    else if (req.query.id) { out.speciesDetails = await getAllSpeciesInformation(req); } 
+    else if (req.params.id) { out.speciesDetails = await getAllSpeciesInformation(req); } 
     else { out.species = await getAllSpecies(req); } 
 
 
