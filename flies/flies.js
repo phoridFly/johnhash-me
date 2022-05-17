@@ -665,78 +665,78 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 
 // });
 
-app.get('/flies/updateCollectingEvent', function(request, response, next){
+// app.get('/flies/updateCollectingEvent', function(request, response, next){
 
-    let initialQuery = 'SELECT collecting_event.id, DATE_FORMAT(collecting_event.start_date, "%Y-%m-%d") AS start_date, DATE_FORMAT(collecting_event.start_date, "%b %d, %Y") AS startDateShown, DATE_FORMAT(collecting_event.end_date, "%Y-%m-%d") AS end_date, DATE_FORMAT(collecting_event.end_date, "%b %d, %Y") AS endDateShown, collecting_event.method,'
-    + 'collecting_event.locality_id, locality.country, locality.region, locality.place FROM collecting_event '
-    + 'INNER JOIN locality ON collecting_event.locality_id = locality.id WHERE collecting_event.id=?';
+//     let initialQuery = 'SELECT collecting_event.id, DATE_FORMAT(collecting_event.start_date, "%Y-%m-%d") AS start_date, DATE_FORMAT(collecting_event.start_date, "%b %d, %Y") AS startDateShown, DATE_FORMAT(collecting_event.end_date, "%Y-%m-%d") AS end_date, DATE_FORMAT(collecting_event.end_date, "%b %d, %Y") AS endDateShown, collecting_event.method,'
+//     + 'collecting_event.locality_id, locality.country, locality.region, locality.place FROM collecting_event '
+//     + 'INNER JOIN locality ON collecting_event.locality_id = locality.id WHERE collecting_event.id=?';
 
-    mysql.pool.query(initialQuery,[request.query.id], function(error, event, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(event);
-        response.render('modCollectingEventForm', {
-            event: event
-        });
-    });
+//     mysql.pool.query(initialQuery,[request.query.id], function(error, event, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(event);
+//         response.render('modCollectingEventForm', {
+//             event: event
+//         });
+//     });
 
-});
+// });
 
-app.get('/flies/updateCollectingEventSubmit', function(request, response, next){
+// app.get('/flies/updateCollectingEventSubmit', function(request, response, next){
 
-    if (request.query.user_id == CONSTANTS.appID) {
+//     if (request.query.user_id == CONSTANTS.appID) {
 
-        mysql.pool.query("UPDATE collecting_event SET locality_id =?, method =?, start_date =?, end_date=? WHERE id =?",
-        [request.query.locality_id, request.query.method, request.query.start_date, request.query.end_date, request.query.id],
-        function(error, result){
-            if (error) {
-                next(error);
-                return;
-            }
+//         mysql.pool.query("UPDATE collecting_event SET locality_id =?, method =?, start_date =?, end_date=? WHERE id =?",
+//         [request.query.locality_id, request.query.method, request.query.start_date, request.query.end_date, request.query.id],
+//         function(error, result){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
 
-            let initialQuery = 'SELECT collecting_event.id, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, collecting_event.method, '
-            + 'locality.country, locality.region, locality.place FROM collecting_event '
-            + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-            + 'ORDER BY collecting_event.id ASC';
+//             let initialQuery = 'SELECT collecting_event.id, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, collecting_event.method, '
+//             + 'locality.country, locality.region, locality.place FROM collecting_event '
+//             + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//             + 'ORDER BY collecting_event.id ASC';
 
-            mysql.pool.query(initialQuery, function(error, event, fields){
-                if (error) {
-                    next(error);
-                    return;
-                }
-                //console.log('select all');
-                response.render('modCollectingEvent', {
-                    title: 'Modify Collecting Events in the Database',
-                    event: event
-                });
-            });
-        });
-    }
+//             mysql.pool.query(initialQuery, function(error, event, fields){
+//                 if (error) {
+//                     next(error);
+//                     return;
+//                 }
+//                 //console.log('select all');
+//                 response.render('modCollectingEvent', {
+//                     title: 'Modify Collecting Events in the Database',
+//                     event: event
+//                 });
+//             });
+//         });
+//     }
 
-    else {
+//     else {
 
-        let initialQuery = 'SELECT collecting_event.id, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, collecting_event.method, '
-        + 'locality.country, locality.region, locality.place FROM collecting_event '
-        + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-        + 'ORDER BY collecting_event.id ASC';
+//         let initialQuery = 'SELECT collecting_event.id, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, collecting_event.method, '
+//         + 'locality.country, locality.region, locality.place FROM collecting_event '
+//         + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//         + 'ORDER BY collecting_event.id ASC';
 
-        mysql.pool.query(initialQuery, function(error, event, fields){
-            if (error) {
-                next(error);
-                return;
-            }
-            //console.log('select all');
-            response.render('modCollectingEvent', {
-                title: 'Modify Collecting Events in the Database',
-                event: event
-            });
-        });
+//         mysql.pool.query(initialQuery, function(error, event, fields){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
+//             //console.log('select all');
+//             response.render('modCollectingEvent', {
+//                 title: 'Modify Collecting Events in the Database',
+//                 event: event
+//             });
+//         });
 
-    }
+//     }
 
-});
+// });
 
 //
 //                  END COLLECTING EVENT

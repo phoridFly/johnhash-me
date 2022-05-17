@@ -60,4 +60,34 @@ module.exports =
             }); 
         });
     },
+    updateCollectingEvent : updateCollectingEvent = (req) =>
+    {
+
+        let collectingEventQuery = `
+            UPDATE 
+                collecting_event 
+            SET 
+                locality_id =?, 
+                method =?, 
+                start_date =?, 
+                end_date=? 
+            WHERE 
+                id =?
+        `;
+        let params = [
+            req.body.locality_id, 
+            req.body.method, 
+            req.body.start_date, 
+            req.body.end_date, 
+            req.params.id]
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(collectingEventQuery, params, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
+    },
 }

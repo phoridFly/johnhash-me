@@ -4,6 +4,7 @@ const
 {
     getAllCollectingEvents,
     getCollectingEventById,
+    updateCollectingEvent,
 } = require('../db_functions/functions_collecting_events');
 
 router.get('/', async (req, res, next) => {
@@ -13,6 +14,14 @@ router.get('/', async (req, res, next) => {
     else { out.collectingEvents = await getAllCollectingEvents(req); } 
 
     res.send(out);
+    
+});
+
+router.put('/', async (req, res, next) => {
+
+    await updateCollectingEvent(req);
+
+    res.sendStatus(200);
     
 });
 
