@@ -64,6 +64,10 @@ app.use('/flies/people/:id', require('./routes/routes_people'));
 app.use('/flies/localities', require('./routes/routes_localities'));
 app.use('/flies/collecting-events', require('./routes/routes_collecting_events'));
 app.use('/flies/collecting-events/:id', require('./routes/routes_collecting_events'));
+app.use('/flies/collectors/', require('./routes/routes_collectors'));
+app.use('/flies/collectors/:cid/people/:pid', require('./routes/routes_collectors'));
+
+
 
 
 
@@ -746,53 +750,53 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 //                  START COLLECTOR
 //
 
-app.get('/flies/modCollector', function(request, response, next){
+// app.get('/flies/modCollector', function(request, response, next){
 
-    let initialQuery = 'SELECT people.first_name, people.last_name, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
-    + 'collecting_event.method, locality.country, locality.region, locality.place, coll_event_people.coll_event_id, '
-    + 'coll_event_people.people_id FROM people '
-    + 'INNER JOIN coll_event_people ON people.id = coll_event_people.people_id '
-    + 'INNER JOIN collecting_event ON coll_event_people.coll_event_id = collecting_event.id '
-    + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-    + 'ORDER BY people.last_name';
+//     let initialQuery = 'SELECT people.first_name, people.last_name, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
+//     + 'collecting_event.method, locality.country, locality.region, locality.place, coll_event_people.coll_event_id, '
+//     + 'coll_event_people.people_id FROM people '
+//     + 'INNER JOIN coll_event_people ON people.id = coll_event_people.people_id '
+//     + 'INNER JOIN collecting_event ON coll_event_people.coll_event_id = collecting_event.id '
+//     + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//     + 'ORDER BY people.last_name';
 
-    mysql.pool.query(initialQuery, function(error, people, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(people);
-        response.render('modCollector', {
-            title: 'Modify Collectors in the Database',
-            people: people
-        });
-    });
+//     mysql.pool.query(initialQuery, function(error, people, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(people);
+//         response.render('modCollector', {
+//             title: 'Modify Collectors in the Database',
+//             people: people
+//         });
+//     });
 
-});
+// });
 
-app.get('/flies/updateCollector', function(request, response, next){
+// app.get('/flies/updateCollector', function(request, response, next){
 
-    let initialQuery = 'SELECT people.first_name, people.last_name, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
-    + 'collecting_event.method, locality.country, locality.region, locality.place, coll_event_people.coll_event_id, '
-    + 'coll_event_people.people_id FROM people '
-    + 'INNER JOIN coll_event_people ON people.id = coll_event_people.people_id '
-    + 'INNER JOIN collecting_event ON coll_event_people.coll_event_id = collecting_event.id '
-    + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-    + 'WHERE coll_event_people.people_id=? AND coll_event_people.coll_event_id =? '
-    + 'ORDER BY people.last_name LIMIT 1';
+//     let initialQuery = 'SELECT people.first_name, people.last_name, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
+//     + 'collecting_event.method, locality.country, locality.region, locality.place, coll_event_people.coll_event_id, '
+//     + 'coll_event_people.people_id FROM people '
+//     + 'INNER JOIN coll_event_people ON people.id = coll_event_people.people_id '
+//     + 'INNER JOIN collecting_event ON coll_event_people.coll_event_id = collecting_event.id '
+//     + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//     + 'WHERE coll_event_people.people_id=? AND coll_event_people.coll_event_id =? '
+//     + 'ORDER BY people.last_name LIMIT 1';
 
-    mysql.pool.query(initialQuery,[request.query.people_id, request.query.coll_event_id], function(error, people, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(people);
-        response.render('modCollectorForm', {
-            people: people
-        });
-    });
+//     mysql.pool.query(initialQuery,[request.query.people_id, request.query.coll_event_id], function(error, people, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(people);
+//         response.render('modCollectorForm', {
+//             people: people
+//         });
+//     });
 
-});
+// });
 
 app.get('/flies/updateCollectorSubmit', function(request, response, next){
 
