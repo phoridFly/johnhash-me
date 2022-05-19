@@ -3,6 +3,7 @@ const router = require('express').Router({ mergeParams: true });
 const
 {
     getAuthorSpecies,
+    getAllAuthors
 } = require('../db_functions/functions_authors');
 
 router.get('/', async (req, res, next) => {
@@ -12,8 +13,8 @@ router.get('/', async (req, res, next) => {
     console.log(req);
 
     //console.log(req.query);
-    // if (req.query.id) { out.person = await getPersonById(req); } 
-    out.authors = await getAuthorSpecies(req);  
+    if (req.params.pid && req.params.sid) { out.author = await getAuthorSpecies(req); } 
+    else { out.authors = await getAllAuthors(req);  }
 
     res.send(out);
     

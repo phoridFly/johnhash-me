@@ -4,6 +4,7 @@ const
 {
     getAllCollectors,
     getCollectorandEvent,
+    updateCollectorAndEvent
 } = require('../db_functions/functions_collectors');
 
 router.get('/', async (req, res, next) => {
@@ -20,12 +21,12 @@ router.get('/', async (req, res, next) => {
     
 });
 
-// router.put('/', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
 
-//     await updatePerson(req);
+    await updateCollectorAndEvent(req);
 
-//     res.sendStatus(200);
+    res.sendStatus(200);
     
-// });
+});
 
 module.exports = router;

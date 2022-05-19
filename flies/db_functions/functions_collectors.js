@@ -85,5 +85,36 @@ module.exports =
     * @param {string} id
     * @returns nothing
     */
+    // updateCollectorAndEvent : updateCollectorAndEvent = (req) =>
+    // {
+    //     let updateQuery = `
+    //         UPDATE 
+    //             coll_event_people 
+    //         SET  
+    //             coll_event_id =?,
+    //             people_id =?
+    //         WHERE 
+    //             coll_event_people.people_id=? 
+    //         AND 
+    //             coll_event_people.coll_event_id =?
+    //     `;
+
+    //     let params = [
+            
+    //         req.body.coll_event_id, 
+    //         req.body.people_id,
+    //         req.params.cid, 
+    //         req.params.pid,  
+    //     ];
+
+    //     return new Promise((resolve, reject) => {
+    //         mysql.pool.query(updateQuery, params, (error, elements) => {
+    //             if(error) {
+    //                 return reject(error);
+    //             }
+    //             return resolve(elements);
+    //         }); 
+    //     });
+    // }
 
 }

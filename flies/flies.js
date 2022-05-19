@@ -66,6 +66,8 @@ app.use('/flies/collecting-events', require('./routes/routes_collecting_events')
 app.use('/flies/collecting-events/:id', require('./routes/routes_collecting_events'));
 app.use('/flies/collectors/', require('./routes/routes_collectors'));
 app.use('/flies/collectors/:cid/people/:pid', require('./routes/routes_collectors'));
+app.use('/flies/authors/', require('./routes/routes_authors'));
+
 
 
 
@@ -840,27 +842,27 @@ app.get('/flies/updateCollectorSubmit', function(request, response, next){
 //                  START AUTHOR
 //
 
-app.get('/flies/modAuthor', function(request, response, next){
+// app.get('/flies/modAuthor', function(request, response, next){
 
-    let initialQuery = 'SELECT people.first_name, people.last_name, '
-    + 'species.family, species.genus, species.specific_epithet, species.year, species_people.people_id, species_people.species_id FROM people '
-    + 'INNER JOIN species_people ON people.id = species_people.people_id '
-    + 'INNER JOIN species ON species_people.species_id = species.id '
-    + 'ORDER BY species.specific_epithet';
+//     let initialQuery = 'SELECT people.first_name, people.last_name, '
+//     + 'species.family, species.genus, species.specific_epithet, species.year, species_people.people_id, species_people.species_id FROM people '
+//     + 'INNER JOIN species_people ON people.id = species_people.people_id '
+//     + 'INNER JOIN species ON species_people.species_id = species.id '
+//     + 'ORDER BY species.specific_epithet';
 
-    mysql.pool.query(initialQuery, function(error, people, fields){
-        if (error) {
-            next(error);
-            return;
-        }
-        //console.log(people);
-        response.render('modAuthor', {
-            title: 'Modify Authors in the Database',
-            people: people
-        });
-    });
+//     mysql.pool.query(initialQuery, function(error, people, fields){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
+//         //console.log(people);
+//         response.render('modAuthor', {
+//             title: 'Modify Authors in the Database',
+//             people: people
+//         });
+//     });
 
-});
+// });
 
 // app.get('/flies/updateAuthor', function(request, response, next){
 
