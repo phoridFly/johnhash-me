@@ -3,7 +3,8 @@ const router = require('express').Router({ mergeParams: true });
 const
 {
     getAuthorSpecies,
-    getAllAuthors
+    getAllAuthors,
+    updateAuthorSpecies
 } = require('../db_functions/functions_authors');
 
 router.get('/', async (req, res, next) => {
@@ -20,12 +21,12 @@ router.get('/', async (req, res, next) => {
     
 });
 
-// router.put('/', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
 
-//     await updatePerson(req);
+    await updateAuthorSpecies(req);
 
-//     res.sendStatus(200);
+    res.sendStatus(200);
     
-// });
+});
 
 module.exports = router;

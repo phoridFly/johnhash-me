@@ -4,8 +4,7 @@ module.exports =
 {
     getAuthorSpecies : getAuthorSpecies = (req) =>
     {
-        console.log(req.params.sid);
-        console.log(req.params.pid);
+        
         let authorQuery = `
         SELECT
             people.first_name, 
@@ -73,7 +72,40 @@ module.exports =
                 return resolve(elements);
             }); 
         });
+    },
+    updateAuthorSpecies : updateAuthorSpecies = (req) =>
+    {
+        console.log(req.params);
+        console.log(req.body);
+        let updateQuery = `
+            UPDATE 
+                species_people 
+            SET 
+                people_id =?, 
+                species_id =?
+            WHERE 
+                species_people.people_id=? 
+            AND 
+                species_people.species_id =?
+        `;
 
+        let params = [
+            
+            req.body.people_id, 
+            req.body.species_id,
+            req.params.pid, 
+            req.params.sid,  
+        ];
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(updateQuery, params, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
     }
+
 };
 

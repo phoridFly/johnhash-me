@@ -67,6 +67,8 @@ app.use('/flies/collecting-events/:id', require('./routes/routes_collecting_even
 app.use('/flies/collectors/', require('./routes/routes_collectors'));
 app.use('/flies/collectors/:cid/people/:pid', require('./routes/routes_collectors'));
 app.use('/flies/authors/', require('./routes/routes_authors'));
+app.use('/flies/authors/:pid/species/:sid', require('./routes/routes_authors'));
+
 
 
 
@@ -800,39 +802,39 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 
 // });
 
-app.get('/flies/updateCollectorSubmit', function(request, response, next){
+// app.get('/flies/updateCollectorSubmit', function(request, response, next){
 
-    mysql.pool.query('UPDATE coll_event_people SET people_id =?, coll_event_id =? '
-    + 'WHERE coll_event_people.people_id=? AND coll_event_people.coll_event_id =?',
-    [request.query.people_id, request.query.coll_event_id, request.query.old_people_id, request.query.old_coll_event_id],
-    function(error, result){
-        if (error) {
-            next(error);
-            return;
-        }
+//     mysql.pool.query('UPDATE coll_event_people SET people_id =?, coll_event_id =? '
+//     + 'WHERE coll_event_people.people_id=? AND coll_event_people.coll_event_id =?',
+//     [request.query.people_id, request.query.coll_event_id, request.query.old_people_id, request.query.old_coll_event_id],
+//     function(error, result){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
 
-        let initialQuery = 'SELECT people.first_name, people.last_name, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
-        + 'collecting_event.method, locality.country, locality.region, locality.place, coll_event_people.coll_event_id, '
-        + 'coll_event_people.people_id FROM people '
-        + 'INNER JOIN coll_event_people ON people.id = coll_event_people.people_id '
-        + 'INNER JOIN collecting_event ON coll_event_people.coll_event_id = collecting_event.id '
-        + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
-        + 'ORDER BY people.last_name';
+//         let initialQuery = 'SELECT people.first_name, people.last_name, DATE_FORMAT(collecting_event.start_date, "%b %d %Y") AS start_date, DATE_FORMAT(collecting_event.end_date, "%b %d %Y") AS end_date, '
+//         + 'collecting_event.method, locality.country, locality.region, locality.place, coll_event_people.coll_event_id, '
+//         + 'coll_event_people.people_id FROM people '
+//         + 'INNER JOIN coll_event_people ON people.id = coll_event_people.people_id '
+//         + 'INNER JOIN collecting_event ON coll_event_people.coll_event_id = collecting_event.id '
+//         + 'INNER JOIN locality ON collecting_event.locality_id = locality.id '
+//         + 'ORDER BY people.last_name';
 
-        mysql.pool.query(initialQuery, function(error, people, fields){
-            if (error) {
-                next(error);
-                return;
-            }
-            //console.log(people);
-            response.render('modCollector', {
-                title: 'Modify Collectors in the Database',
-                people: people
-            });
-        });
-    });
+//         mysql.pool.query(initialQuery, function(error, people, fields){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
+//             //console.log(people);
+//             response.render('modCollector', {
+//                 title: 'Modify Collectors in the Database',
+//                 people: people
+//             });
+//         });
+//     });
 
-});
+// });
 
 //
 //                  END COLLECTOR
@@ -886,37 +888,37 @@ app.get('/flies/updateCollectorSubmit', function(request, response, next){
 
 // });
 
-app.get('/flies/updateAuthorSubmit', function(request, response, next){
+// app.get('/flies/updateAuthorSubmit', function(request, response, next){
 
-    mysql.pool.query('UPDATE species_people SET species_id =?, people_id =? '
-    + 'WHERE species_people.species_id=? AND species_people.people_id =?',
-    [request.query.species_id, request.query.people_id, request.query.old_species_id, request.query.old_people_id],
-    function(error, result){
-        if (error) {
-            next(error);
-            return;
-        }
+//     mysql.pool.query('UPDATE species_people SET species_id =?, people_id =? '
+//     + 'WHERE species_people.species_id=? AND species_people.people_id =?',
+//     [request.query.species_id, request.query.people_id, request.query.old_species_id, request.query.old_people_id],
+//     function(error, result){
+//         if (error) {
+//             next(error);
+//             return;
+//         }
 
-        let initialQuery = 'SELECT people.first_name, people.last_name, '
-        + 'species.family, species.genus, species.specific_epithet, species.year, species_people.people_id, species_people.species_id FROM people '
-        + 'INNER JOIN species_people ON people.id = species_people.people_id '
-        + 'INNER JOIN species ON species_people.species_id = species.id '
-        + 'ORDER BY species.specific_epithet';
+//         let initialQuery = 'SELECT people.first_name, people.last_name, '
+//         + 'species.family, species.genus, species.specific_epithet, species.year, species_people.people_id, species_people.species_id FROM people '
+//         + 'INNER JOIN species_people ON people.id = species_people.people_id '
+//         + 'INNER JOIN species ON species_people.species_id = species.id '
+//         + 'ORDER BY species.specific_epithet';
 
-        mysql.pool.query(initialQuery, function(error, people, fields){
-            if (error) {
-                next(error);
-                return;
-            }
-            //console.log(people);
-            response.render('modAuthor', {
-                title: 'Modify Authors in the Database',
-                people: people
-            });
-        });
-    });
+//         mysql.pool.query(initialQuery, function(error, people, fields){
+//             if (error) {
+//                 next(error);
+//                 return;
+//             }
+//             //console.log(people);
+//             response.render('modAuthor', {
+//                 title: 'Modify Authors in the Database',
+//                 people: people
+//             });
+//         });
+//     });
 
-});
+// });
 
 //
 //                  END AUTHOR
