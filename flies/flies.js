@@ -1,29 +1,12 @@
-
-
 var express = require('express');
 var bodyParser = require('body-parser');
-
-// below is for production
 var mysql = require('./dbcon.js');
-
-// below is for dev
-// var mysql = require('./dbconDev.js');
-
 var app = express();
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
-//var exphbs = require('express-handlebars').create({defaultLayout:'main'});
-//app.use(express.static(__dirname + '/public'));
-
-// remove for production
-//const port = 3000;
-
-
-//app.engine('handlebars', exphbs.engine);
-//app.set('view engine', 'handlebars');
 
 // secret key for being able to update the db from the app
 const CONSTANTS = require('./constants.js');
@@ -43,31 +26,25 @@ app.use(function(req, res, next) {
     next();
  });
 
-
-// remove from Production
-// app.get('/', (req, res) => {
-//     res.send('Hello, Dev API and such');
-//     console.log(CONSTANTS.appID);
-// });
-
-
-// SELECT ONLY QUERIES
-
 // mount routes here
-app.use('/flies/species/', require('./routes/routes_species'));
-app.use('/flies/species/:id', require('./routes/routes_species'));
-app.use('/flies/species/:sid/people/:pid', require('./routes/routes_authors'));
-app.use('/flies/specimens/', require('./routes/routes_specimens'));
-app.use('/flies/specimens/:id', require('./routes/routes_specimens'));
-app.use('/flies/people/', require('./routes/routes_people'));
-app.use('/flies/people/:id', require('./routes/routes_people'));
-app.use('/flies/localities', require('./routes/routes_localities'));
-app.use('/flies/collecting-events', require('./routes/routes_collecting_events'));
-app.use('/flies/collecting-events/:id', require('./routes/routes_collecting_events'));
-app.use('/flies/collectors/', require('./routes/routes_collectors'));
+app.use('/flies/species/',                    require('./routes/routes_species'));
+app.use('/flies/species/:id',                 require('./routes/routes_species'));
+app.use('/flies/species/:sid/people/:pid',    require('./routes/routes_authors'));
+app.use('/flies/specimens/',                  require('./routes/routes_specimens'));
+app.use('/flies/specimens/:id',               require('./routes/routes_specimens'));
+app.use('/flies/people/',                     require('./routes/routes_people'));
+app.use('/flies/people/:id',                  require('./routes/routes_people'));
+app.use('/flies/localities',                  require('./routes/routes_localities'));
+app.use('/flies/collecting-events',           require('./routes/routes_collecting_events'));
+app.use('/flies/collecting-events/:id',       require('./routes/routes_collecting_events'));
+app.use('/flies/collectors/',                 require('./routes/routes_collectors'));
 app.use('/flies/collectors/:cid/people/:pid', require('./routes/routes_collectors'));
-app.use('/flies/authors/', require('./routes/routes_authors'));
-app.use('/flies/authors/:pid/species/:sid', require('./routes/routes_authors'));
+app.use('/flies/authors/',                    require('./routes/routes_authors'));
+app.use('/flies/authors/:pid/species/:sid',   require('./routes/routes_authors'));
+app.use('/flies/lots/',                       require('./routes/routes_alcohol_lots'));
+app.use('/flies/lots/:id',                    require('./routes/routes_alcohol_lots'));
+
+
 
 
 
@@ -928,25 +905,25 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 //                  START ALCOHOL LOTS
 //
 
-app.get('/flies/modAlcoholLots', function(request, response, next){
+// app.get('/flies/modAlcoholLots', function(request, response, next){
 
-    let initialQuery = 'SELECT alcohol_lots.id, collecting_event.id AS cei, locality.country, locality.region, alcohol_lots.empty, alcohol_lots.approx_number, alcohol_lots.sample_taxa, alcohol_lots.collector_code FROM locality '
-    + 'INNER JOIN collecting_event ON locality.id = collecting_event.locality_id '
-    + 'INNER JOIN alcohol_lots ON collecting_event.id = alcohol_lots.collecting_event_id '
-    + 'ORDER BY alcohol_lots.id ASC';
+//     let initialQuery = 'SELECT alcohol_lots.id, collecting_event.id AS cei, locality.country, locality.region, alcohol_lots.empty, alcohol_lots.approx_number, alcohol_lots.sample_taxa, alcohol_lots.collector_code FROM locality '
+//     + 'INNER JOIN collecting_event ON locality.id = collecting_event.locality_id '
+//     + 'INNER JOIN alcohol_lots ON collecting_event.id = alcohol_lots.collecting_event_id '
+//     + 'ORDER BY alcohol_lots.id ASC';
 
-    mysql.pool.query(initialQuery, function(error, lots, fields){
-        if (error) {
-            next(error);
-             return;
-         }
-        response.render('modAlcoholLots', {
-            title: 'Modify Alcohol Lots in the Database',
-            lots: lots
-        });
-    });
+//     mysql.pool.query(initialQuery, function(error, lots, fields){
+//         if (error) {
+//             next(error);
+//              return;
+//          }
+//         response.render('modAlcoholLots', {
+//             title: 'Modify Alcohol Lots in the Database',
+//             lots: lots
+//         });
+//     });
 
-});
+// });
 
 
 
