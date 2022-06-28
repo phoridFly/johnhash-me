@@ -26,4 +26,12 @@ router.put('/', async (req, res, next) => {
     
 });
 
+router.post('/', async (req, res, next) => {
+
+    await createPerson(req);
+
+    res.sendStatus(200);
+    
+});
+
 module.exports = router;

@@ -78,5 +78,30 @@ module.exports =
                return resolve(elements);
            }); 
        });
+   },
+   createPerson : createPerson = (req) =>
+   {
+       let insertQuery = `
+       INSERT INTO
+           people (
+            first_name,
+            last_name
+           )
+        VALUES (?,?)
+       `;
+
+       let params = [
+           req.body.first_name, 
+           req.body.last_name, 
+       ];
+
+       return new Promise((resolve, reject) => {
+           mysql.pool.query(insertQuery, params, (error, elements) => {
+               if(error) {
+                   return reject(error);
+               }
+               return resolve(elements);
+           }); 
+       });
    }
 }

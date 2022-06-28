@@ -63,4 +63,38 @@ module.exports =
             }); 
         });
     },
+    createLocality : createLocality = (req) =>
+    {
+
+        let insertQuery = `
+            INSERT INTO 
+                locality ( 
+                    country, 
+                    region, 
+                    place, 
+                    longitude, 
+                    latitude, 
+                    elevation)
+            VALUES 
+                (?,?,?,?,?,?)
+        `;
+
+        let params = [
+            req.body.country, 
+            req.body.region, 
+            req.body.place, 
+            req.body.longitude, 
+            req.body.latitude, 
+            req.body.elevation, 
+        ]
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(insertQuery, params, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
+    },
 }

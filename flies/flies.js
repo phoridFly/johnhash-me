@@ -1007,26 +1007,26 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 //                  START PEOPLE
 //
 
-app.get('/flies/addPerson',function(req,res,next){
+// app.get('/flies/addPerson',function(req,res,next){
 
-    console.log(req.query.appID);
+//     console.log(req.query.appID);
 
-    if (req.query.appID == CONSTANTS.appID) {
-        mysql.pool.query("INSERT INTO people (`first_name`, `last_name`) VALUES (?,?)", 
-        [req.query.first_name, req.query.last_name], function(err, result){
-            if(err){
-                next(err);
-                return;
-            }
-        });
-        res.redirect('back');  
-    }
+//     if (req.query.appID == CONSTANTS.appID) {
+//         mysql.pool.query("INSERT INTO people (`first_name`, `last_name`) VALUES (?,?)", 
+//         [req.query.first_name, req.query.last_name], function(err, result){
+//             if(err){
+//                 next(err);
+//                 return;
+//             }
+//         });
+//         res.redirect('back');  
+//     }
 
-    else {
-        res.status(401);
-    }
+//     else {
+//         res.status(401);
+//     }
 
-});
+// });
 
 //
 //                  END PEOPLE
@@ -1036,30 +1036,30 @@ app.get('/flies/addPerson',function(req,res,next){
 //                  START LOCALITIES
 //
 
-app.get('/flies/addLocality',function(req,res,next){
+// app.get('/flies/addLocality',function(req,res,next){
 
-    console.log(req.query.appID);
+//     console.log(req.query.appID);
 
-    if (req.query.appID == CONSTANTS.appID) {
+//     if (req.query.appID == CONSTANTS.appID) {
 
-        mysql.pool.query("INSERT INTO locality (`country`, `region`, `place`, `longitude`, `latitude`, `elevation`) VALUES (?,?,?,?,?,?)", 
-        [req.query.country, req.query.region, req.query.place, req.query.longitude, req.query.latitude, req.query.elevation], function(err, result){
-            if(err){
-                next(err);
-                return;
-            }
-        });
-        res.redirect('back');
+//         mysql.pool.query("INSERT INTO locality (`country`, `region`, `place`, `longitude`, `latitude`, `elevation`) VALUES (?,?,?,?,?,?)", 
+//         [req.query.country, req.query.region, req.query.place, req.query.longitude, req.query.latitude, req.query.elevation], function(err, result){
+//             if(err){
+//                 next(err);
+//                 return;
+//             }
+//         });
+//         res.redirect('back');
 
-    }
+//     }
 
-    else {
-        res.status(401);
-        console.log("failed")
-    }
+//     else {
+//         res.status(401);
+//         console.log("failed")
+//     }
 
 
-});
+// });
 
 //
 //                  END LOCALITIES
