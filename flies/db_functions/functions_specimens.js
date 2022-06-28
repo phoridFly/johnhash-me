@@ -146,5 +146,42 @@ module.exports =
                 return resolve(elements);
             }); 
         });
-    }
+    },
+    createSpecimen : createSpecimen = (req) =>
+    {
+        let insertQuery = `
+        INSERT INTO 
+            specimen (
+                institution_code, 
+                collection_code, 
+                catalog_number, 
+                species_id, 
+                collecting_event_id,
+                type_status, 
+                sex, 
+                image_name) 
+            VALUES (?,?,?,?,?,?,?,?)
+        `;
+
+        let params = [
+            req.body.institution_code, 
+            req.body.collection_code, 
+            req.body.catalog_number, 
+            req.body.species_id, 
+            req.body.collecting_event_id, 
+            req.body.type_status, 
+            req.body.sex, 
+            req.body.image_name, 
+        ];
+        console.log('specimen params ' + params);
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(insertQuery, params, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
+    },  
 };

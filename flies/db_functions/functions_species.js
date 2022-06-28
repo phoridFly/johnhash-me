@@ -176,5 +176,33 @@ module.exports =
                 return resolve(elements);
             }); 
         });
+    },
+    createSpecies : createSpecies = (req) =>
+    {
+        let insertQuery = `
+        INSERT INTO 
+            species ( 
+            family,
+            genus, 
+            specific_epithet, 
+            year)
+        VALUES (?,?,?,?)
+        `;
+
+        let params = [
+            req.body.family, 
+            req.body.genus, 
+            req.body.specific_epithet, 
+            req.body.year, 
+        ];
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(insertQuery, params, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
     }
 };

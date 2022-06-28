@@ -948,27 +948,27 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 //                  START SPECIMEN
 //
 
-app.get('/flies/addSpecimen',function(req,res,next){
-    //console.log("in addSpecimen");
+// app.get('/flies/addSpecimen',function(req,res,next){
+//     //console.log("in addSpecimen");
 
-    // check if appID is valid first
-    if (req.query.appID == CONSTANTS.appID) {
+//     // check if appID is valid first
+//     if (req.query.appID == CONSTANTS.appID) {
 
-        mysql.pool.query("INSERT INTO specimen (`institution_code`, `collection_code`, `catalog_number`, `species_id`, `collecting_event_id`, `type_status`, `sex`, `image_name`) VALUES (?,?,?,?,?,?,?,?)", 
-        [req.query.institution_code, req.query.collection_code, req.query.catalog_number, req.query.species_id, req.query.collecting_event_id, req.query.type_status, req.query.sex, req.query.image_name], function(err, result){
-        if(err){
-            next(err);
-            return;
-        }
-        });
-        res.redirect('back');
-    }
-    else {
-        res.redirect('back');
-        res.status(401);
+//         mysql.pool.query("INSERT INTO specimen (`institution_code`, `collection_code`, `catalog_number`, `species_id`, `collecting_event_id`, `type_status`, `sex`, `image_name`) VALUES (?,?,?,?,?,?,?,?)", 
+//         [req.query.institution_code, req.query.collection_code, req.query.catalog_number, req.query.species_id, req.query.collecting_event_id, req.query.type_status, req.query.sex, req.query.image_name], function(err, result){
+//         if(err){
+//             next(err);
+//             return;
+//         }
+//         });
+//         res.redirect('back');
+//     }
+//     else {
+//         res.redirect('back');
+//         res.status(401);
 
-    }
-});
+//     }
+// });
 
 //
 //                  END SPECIMEN
@@ -978,26 +978,26 @@ app.get('/flies/addSpecimen',function(req,res,next){
 //                  START SPECIES
 //
 
-app.get('/flies/addSpecies',function(req,res,next){
-    //console.log("in addSpecies");
-    if (req.query.appID == CONSTANTS.appID) {
+// app.get('/flies/addSpecies',function(req,res,next){
+//     //console.log("in addSpecies");
+//     if (req.query.appID == CONSTANTS.appID) {
 
-        mysql.pool.query("INSERT INTO species (`family`, `genus`, `specific_epithet`, `year`) VALUES (?,?,?,?)", 
-        [req.query.family, req.query.genus, req.query.specific_epithet, req.query.year], function(err, result){
-            if(err){
-                next(err);
-                return;
-            }
-        });
-        res.redirect('back');
+//         mysql.pool.query("INSERT INTO species (`family`, `genus`, `specific_epithet`, `year`) VALUES (?,?,?,?)", 
+//         [req.query.family, req.query.genus, req.query.specific_epithet, req.query.year], function(err, result){
+//             if(err){
+//                 next(err);
+//                 return;
+//             }
+//         });
+//         res.redirect('back');
 
-    }
+//     }
 
-    else {
-        res.status(401);
+//     else {
+//         res.status(401);
 
-    }
-});
+//     }
+// });
 
 //
 //                  END SPECIES

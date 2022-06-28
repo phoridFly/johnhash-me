@@ -7,6 +7,7 @@ const
     getAllSpeciesByGenus,
     getAllSpeciesInformation,
     getSpeciesDistinctOccurance,
+    createSpecies
 } = require('../db_functions/functions_species');
 
 router.get('/', async (req, res, next) => {
@@ -33,6 +34,14 @@ router.get('/distinct-occurrence-records', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
 
     await updateSpecies(req);
+
+    res.sendStatus(200);
+    
+});
+
+router.post('/', async (req, res, next) => {
+
+    await createSpecies(req);
 
     res.sendStatus(200);
     
