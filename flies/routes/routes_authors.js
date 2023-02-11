@@ -9,15 +9,15 @@ const
 
 router.get('/', async (req, res, next) => {
 
-    const out = {};
+    const data = {};
 
     console.log(req);
 
     //console.log(req.query);
-    if (req.params.pid && req.params.sid) { out.author = await getAuthorSpecies(req); } 
-    else { out.authors = await getAllAuthors(req);  }
+    if (req.params.pid && req.params.sid) { data.author = await getAuthorSpecies(req); } 
+    else { data.authors = await getAllAuthors(req);  }
 
-    res.send(out);
+    res.send(data);
     
 });
 

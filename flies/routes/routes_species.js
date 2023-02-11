@@ -12,22 +12,45 @@ const
 
 router.get('/', async (req, res, next) => {
 
-    const out = {};
-    // console.log(req.query);
-    if (req.query.genus) { out.species = await getAllSpeciesByGenus(req); } 
-    else if (req.params.id) { out.speciesDetails = await getAllSpeciesInformation(req); } 
-    else { out.species = await getAllSpecies(req); } 
+    let data = {};
+    
+    if (req.query.genus) {
+         data.species = await getAllSpeciesByGenus(req); 
+    } 
+    else if (req.params.id) { 
+        let response = await getAllSpeciesInformation(req); 
+        //consolidate data from mulitple authors
+        let species = {};
+        species.id               = response[0].id;
+        species.genus            = response[0].genus;
+        species.specific_epithet = response[0].specific_epithet;
+        species.year             = response[0].year;
+        species.diagnosis        = response[0].diagnosis;
+        species.authors          = []
+        response.forEach(element => {
+            let author = {
+                first_name : '',
+                last_name : '',
+            }
+            author.first_name = element.first_name;
+            author.last_name = element.last_name
+            species.authors.push(author)
+        });
+        data.species = species;
+    } 
+    else { 
+        data.species = await getAllSpecies(req); 
+    } 
 
-
-    res.send(out);
+    res.send(data);
     
 });
 
 router.get('/distinct-occurrence-records', async (req, res, next) => {
-    const out = {};
-    out.localties = await getSpeciesDistinctOccurance(req);
+    const data = {};
+    data.localties = await getSpeciesDistinctOccurance(req);
     //console.log(req.query);
-    res.send(out);
+    res.send(data);
     
 });
 

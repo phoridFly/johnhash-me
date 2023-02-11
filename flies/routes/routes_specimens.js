@@ -9,12 +9,12 @@ const
 
 router.get('/', async (req, res, next) => {
 
-    const out = {};
+    const data = {};
     //console.log(req.query);
-    if (req.params.id) { out.specimen = await getSpecimenById(req); } 
-    else { out.specimens = await getAllSpecimens(req); } 
+    if (req.params.id) { data.specimen = await getSpecimenById(req); } 
+    else { data.specimens = await getAllSpecimens(req); } 
 
-    res.send(out);
+    res.send(data);
     
 });
 

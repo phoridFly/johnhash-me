@@ -9,12 +9,12 @@ const
 
 router.get('/', async (req, res, next) => {
 
-    const out = {};
+    const data = {};
     //console.log(req.query);
-    if (req.params.id) { out.person = await getPersonById(req); } 
-    else { out.people = await getAllPeople(req); } 
+    if (req.params.id) { data.person = await getPersonById(req); } 
+    else { data.people = await getAllPeople(req); } 
 
-    res.send(out);
+    res.send(data);
     
 });
 

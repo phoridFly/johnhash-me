@@ -3,23 +3,26 @@ const router = require('express').Router();
 const 
 {
     getAllLocalities,
+    getLocalityById,
     updateLocality,
     createLocality,
 } = require('../db_functions/functions_localities');
 
 router.get('/', async (req, res, next) => {
 
-    const out = {};
+    const data = {};
     //console.log(req.query);
-    //if (req.query.id) { out.specimenDetails = await getSpecimenById(req); } 
-    //else { out.specimens = await getAllSpecimens(req); } 
-    out.localities = await getAllLocalities(req);
-    res.send(out);
+    if (req.query.id) { 
+        data.locality = await getLocalityById(req); 
+    } 
+    else { 
+        data.localities = await getAllLocalities(req); 
+    } 
+    res.send(data);
     
 });
 
 router.put('/', async (req, res, next) => {
-
 
     await updateLocality(req);
 
@@ -28,7 +31,6 @@ router.put('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-
 
     await createLocality(req);
 

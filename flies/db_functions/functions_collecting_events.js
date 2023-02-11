@@ -13,7 +13,8 @@ module.exports =
                 collecting_event.method,
                 locality.country, 
                 locality.region, 
-                locality.place 
+                locality.place,
+                locality.id AS locality_id
             FROM
                 collecting_event
             INNER JOIN 
@@ -42,7 +43,8 @@ module.exports =
                 collecting_event.method,
                 locality.country, 
                 locality.region, 
-                locality.place 
+                locality.place,
+                locality.id AS locality_id 
             FROM
                 collecting_event
             INNER JOIN 
@@ -53,7 +55,7 @@ module.exports =
 
         return new Promise((resolve, reject) => {
             mysql.pool.query(collectingEventQuery, req.params.id, (error, elements) => {
-                if(error) {
+                if (error) {
                     return reject(error);
                 }
                 return resolve(elements);
@@ -79,7 +81,8 @@ module.exports =
             req.body.method, 
             req.body.start_date, 
             req.body.end_date, 
-            req.params.id]
+            req.params.id
+        ]
 
         return new Promise((resolve, reject) => {
             mysql.pool.query(collectingEventQuery, params, (error, elements) => {
@@ -99,16 +102,17 @@ module.exports =
                     locality_id, 
                     method, 
                     start_date, 
-                    end_date) 
+                    end_date
+                ) 
             VALUES 
-                
+                (?,?,?,?)
         `;
         let params = [
             req.body.locality_id, 
             req.body.method, 
             req.body.start_date, 
             req.body.end_date, 
-            req.params.id]
+        ]
 
         return new Promise((resolve, reject) => {
             mysql.pool.query(collectingEventQuery, params, (error, elements) => {

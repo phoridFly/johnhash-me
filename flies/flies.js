@@ -1069,23 +1069,23 @@ app.get('/flies/selectedCharacters', function(request, response, next){
 //                  START COLLECTING EVENT
 //
 
-app.get('/flies/addCollectingEvent',function(req,res,next){
+// app.get('/flies/addCollectingEvent',function(req,res,next){
 
-    if (req.query.appID == CONSTANTS.appID) {
-        mysql.pool.query("INSERT INTO collecting_event (`locality_id`, `method`, `start_date`, `end_date`) VALUES (?,?,?,?)", 
-        [req.query.locality_id, req.query.method, req.query.start_date, req.query.end_date], function(err, result){
-            if(err){
-                next(err);
-                return;
-            }
-        });
-        res.redirect('back');
-    }
+//     if (req.query.appID == CONSTANTS.appID) {
+//         mysql.pool.query("INSERT INTO collecting_event (`locality_id`, `method`, `start_date`, `end_date`) VALUES (?,?,?,?)", 
+//         [req.query.locality_id, req.query.method, req.query.start_date, req.query.end_date], function(err, result){
+//             if(err){
+//                 next(err);
+//                 return;
+//             }
+//         });
+//         res.redirect('back');
+//     }
 
-    else {
-        res.status(401);
-    }
-});
+//     else {
+//         res.status(401);
+//     }
+// });
 
 //
 //                  END COLLECTING EVENT

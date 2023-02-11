@@ -9,15 +9,15 @@ const
 
 router.get('/', async (req, res, next) => {
 
-    const out = {};
+    const data = {};
 
     console.log(req);
 
     //console.log(req.query);
-    if (req.params.id) { out.lot = await getAlcoholLotsByID(req); } 
-    else { out.lot = await getAllAlcoholLots(req);  }
+    if (req.params.id) { data.lot = await getAlcoholLotsByID(req); } 
+    else { data.lot = await getAllAlcoholLots(req);  }
 
-    res.send(out);
+    res.send(data);
     
 });
 

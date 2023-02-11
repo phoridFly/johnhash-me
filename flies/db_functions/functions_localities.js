@@ -27,6 +27,33 @@ module.exports =
             }); 
         });
     },
+    getLocalityById : getLocalityById = (req) =>
+    {
+
+        let localityQuery = `
+            SELECT 
+                id, 
+                country, 
+                region, 
+                place, 
+                longitude, 
+                latitude, 
+                elevation 
+            FROM 
+                locality
+            WHERE
+                id=?
+        `;
+
+        return new Promise((resolve, reject) => {
+            mysql.pool.query(localityQuery, req.query.id, (error, elements) => {
+                if(error) {
+                    return reject(error);
+                }
+                return resolve(elements);
+            }); 
+        });
+    },
     updateLocality : updateLocality = (req) =>
     {
 
